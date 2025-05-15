@@ -10,7 +10,6 @@
       </p>
       <ul class="list-disc pl-5 mb-4">
         <li>Afficher une citation aléatoire</li>
-        <li>Voir toutes les citations disponibles</li>
         <li>Ajouter de nouvelles citations</li>
       </ul>
       <p>
