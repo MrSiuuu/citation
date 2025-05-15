@@ -13,6 +13,11 @@ RUN cd frontend && npm install
 
 COPY . .
 
+# Construire le frontend
+RUN cd frontend && npm run build
+
+# Exposer le port du backend
 EXPOSE 3000
 
-CMD ["npm", "start"] 
+# Commande de démarrage modifiée
+CMD ["sh", "-c", "cd backend && node app.js"] 
