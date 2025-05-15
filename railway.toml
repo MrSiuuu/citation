@@ -4,7 +4,7 @@ dockerfilePath = "Dockerfile"
 buildDirectory = "."
 
 [deploy]
-healthcheckPath = "/"
+healthcheckPath = "/api/quotes/random"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
 

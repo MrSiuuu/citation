@@ -13,6 +13,9 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Servir les fichiers statiques du frontend
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
 // Chemin vers le fichier JSON des citations
 const quotesFilePath = path.join(__dirname, "quotes.json");
 
@@ -122,13 +125,9 @@ app.delete("/api/quotes/:id", (req, res) => {
   res.json({ message: "Citation supprimée avec succès" });
 });
 
-// Servir le frontend en production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
-  
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-  });
-}
+// Route pour toutes les autres requêtes - renvoyer index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
 
 app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`)); 
