@@ -27,7 +27,7 @@ RUN mkdir -p /usr/share/nginx/html
 RUN cp -r frontend/dist/* /usr/share/nginx/html/
 
 # Exposer le port
-EXPOSE 80
+EXPOSE 8080
 
 # Script de démarrage pour exécuter à la fois Nginx et Node.js
 RUN echo '#!/bin/sh\nnginx\nnode backend/app.js' > /start.sh
