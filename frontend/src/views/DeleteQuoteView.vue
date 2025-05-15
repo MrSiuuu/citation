@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 const quotes = ref([])
 const isLoading = ref(false)
 const error = ref(null)

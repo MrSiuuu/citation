@@ -24,7 +24,7 @@ const addQuote = async () => {
   successMessage.value = null
 
   try {
-    const response = await fetch(`${API_URL}/api/quotes`, {
+    const response = await fetch('/api/quotes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

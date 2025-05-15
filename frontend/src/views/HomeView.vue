@@ -2,7 +2,6 @@
 import { ref, onMounted } from 'vue'
 import AddQuoteForm from '@/components/AddQuoteForm.vue'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 const quotes = ref([])
 const randomQuote = ref(null)
 const isLoading = ref(false)
@@ -13,7 +12,7 @@ const fetchQuotes = async () => {
   isLoading.value = true
   error.value = null
   try {
-    const response = await fetch(`${API_URL}/api/quotes`)
+    const response = await fetch('/api/quotes')
     if (!response.ok) throw new Error('Erreur lors de la récupération des citations')
     const data = await response.json()
     quotes.value = data.quotes
