@@ -29,8 +29,8 @@ const fetchRandomQuote = async () => {
   isLoading.value = true
   error.value = null
   try {
-    const response = await fetch(`${API_URL}/api/quotes/random`)
-    if (!response.ok) throw new Error('Erreur lors de la récupération d\'une citation aléatoire')
+    const response = await fetch('/api/quotes/random')
+    if (!response.ok) throw new Error('Erreur lors de la récupération de la citation')
     const data = await response.json()
     randomQuote.value = data.quote
   } catch (err) {

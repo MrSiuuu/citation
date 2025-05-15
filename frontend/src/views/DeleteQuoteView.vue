@@ -12,7 +12,7 @@ const fetchQuotes = async () => {
   isLoading.value = true
   error.value = null
   try {
-    const response = await fetch(`${API_URL}/api/quotes`)
+    const response = await fetch('/api/quotes')
     if (!response.ok) throw new Error('Erreur lors de la récupération des citations')
     const data = await response.json()
     quotes.value = data.quotes
@@ -33,7 +33,7 @@ const deleteQuote = async (id) => {
   error.value = null
   
   try {
-    const response = await fetch(`${API_URL}/api/quotes/${id}`, {
+    const response = await fetch(`/api/quotes/${id}`, {
       method: 'DELETE'
     })
     
