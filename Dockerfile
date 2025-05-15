@@ -16,8 +16,21 @@ COPY . .
 # Construire le frontend
 RUN cd frontend && npm run build
 
-# Exposer le port du backend
-EXPOSE 3000
+# Installer Nginx
+RUN apk add --no-cache nginx
 
-# Utiliser une commande qui fonctionne dans le conteneur
-CMD ["node", "backend/app.js"] 
+# Copier la configuration Nginx
+COPY frontend/nginx.conf /etc/nginx/http.d/default.conf
+
+# Copier les fichiers de build du frontend
+RUN mkdir -p /usr/share/nginx/html
+RUN cp -r frontend/dist/* /usr/share/nginx/html/
+
+# Exposer le port
+EXPOSE 80
+
+# Script de démarrage pour exécuter à la fois Nginx et Node.js
+RUN echo '#!/bin/sh\nnginx\nnode backend/app.js' > /start.sh
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"] 
