@@ -2,35 +2,36 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
-
+# Installer les dépendances du backend
 COPY backend/package*.json ./backend/
 RUN cd backend && npm install
 
+# Installer les dépendances du frontend et construire
 COPY frontend/package*.json ./frontend/
 RUN cd frontend && npm install
 
+# Copier tous les fichiers source
 COPY . .
 
 # Construire le frontend
 RUN cd frontend && npm run build
 
 # Installer Nginx
-RUN apk add --no-cache nginx
+RUN apk add --no-cache nginx supervisor
 
-# Copier la configuration Nginx
+# Configurer Nginx
 COPY frontend/nginx.conf /etc/nginx/http.d/default.conf
 
-# Copier les fichiers de build du frontend
+# Créer le répertoire pour les fichiers statiques
 RUN mkdir -p /usr/share/nginx/html
 RUN cp -r frontend/dist/* /usr/share/nginx/html/
 
-# Exposer le port
-EXPOSE 8080
+# Configurer supervisord pour gérer les processus
+RUN mkdir -p /etc/supervisor.d/
+COPY supervisord.conf /etc/supervisor.d/supervisord.ini
 
-# Script de démarrage pour exécuter à la fois Nginx et Node.js
-RUN echo '#!/bin/sh\nnginx\nnode backend/app.js' > /start.sh
-RUN chmod +x /start.sh
+# Exposer le port que Railway utilise
+EXPOSE 80
 
-CMD ["/start.sh"] 
+# Démarrer supervisord qui lancera Nginx et Node.js
+CMD ["supervisord", "-c", "/etc/supervisor.d/supervisord.ini"] 

@@ -4,10 +4,10 @@ dockerfilePath = "Dockerfile"
 buildDirectory = "."
 
 [deploy]
-startCommand = "node backend/app.js"
-healthcheckPath = "/api/quotes"
+healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
 
 [env]
-NODE_ENV = "production" 
+NODE_ENV = "production"
+PORT = "3000"  # Port pour le backend Node.js 
