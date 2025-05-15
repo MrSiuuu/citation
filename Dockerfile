@@ -19,5 +19,5 @@ RUN cd frontend && npm run build
 # Exposer le port du backend
 EXPOSE 3000
 
-# Commande de démarrage modifiée
-CMD ["sh", "-c", "cd backend && node app.js"] 
+# Utiliser une commande qui fonctionne dans le conteneur
+CMD ["node", "backend/app.js"] 

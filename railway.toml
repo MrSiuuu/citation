@@ -1,10 +1,10 @@
 [build]
 builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile"
-buildDirectory = "backend"
+buildDirectory = "."
 
 [deploy]
-startCommand = "cd backend && node app.js"
+startCommand = "node backend/app.js"
 healthcheckPath = "/api/quotes"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
