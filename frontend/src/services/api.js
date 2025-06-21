@@ -1,71 +1,37 @@
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 // Service API centralisé
 const api = {
   async getQuotes() {
-    try {
-      const response = await fetch('/api/quotes');
-      if (!response.ok) {
-        const errorData = await response.text();
-        console.error('Erreur API:', errorData);
-        throw new Error(`Erreur lors de la récupération des citations: ${response.status}`);
-      }
-      return response.json();
-    } catch (error) {
-      console.error('Erreur réseau:', error);
-      throw error;
-    }
+    const response = await fetch(`${API_BASE_URL}/api/quotes`);
+    if (!response.ok) throw new Error('Erreur lors de la récupération des citations');
+    return response.json();
   },
   
   async getRandomQuote() {
-    try {
-      const response = await fetch('/api/quotes/random');
-      if (!response.ok) {
-        const errorData = await response.text();
-        console.error('Erreur API:', errorData);
-        throw new Error(`Erreur lors de la récupération d'une citation aléatoire: ${response.status}`);
-      }
-      return response.json();
-    } catch (error) {
-      console.error('Erreur réseau:', error);
-      throw error;
-    }
+    const response = await fetch(`${API_BASE_URL}/api/quotes/random`);
+    if (!response.ok) throw new Error('Erreur lors de la récupération d\'une citation aléatoire');
+    return response.json();
   },
   
   async addQuote(quote) {
-    try {
-      const response = await fetch('/api/quotes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(quote)
-      });
-      if (!response.ok) {
-        const errorData = await response.text();
-        console.error('Erreur API:', errorData);
-        throw new Error(`Erreur lors de l'ajout de la citation: ${response.status}`);
-      }
-      return response.json();
-    } catch (error) {
-      console.error('Erreur réseau:', error);
-      throw error;
-    }
+    const response = await fetch(`${API_BASE_URL}/api/quotes`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(quote)
+    });
+    if (!response.ok) throw new Error('Erreur lors de l\'ajout de la citation');
+    return response.json();
   },
   
   async deleteQuote(id) {
-    try {
-      const response = await fetch(`/api/quotes/${id}`, {
-        method: 'DELETE'
-      });
-      if (!response.ok) {
-        const errorData = await response.text();
-        console.error('Erreur API:', errorData);
-        throw new Error(`Erreur lors de la suppression de la citation: ${response.status}`);
-      }
-      return response.json();
-    } catch (error) {
-      console.error('Erreur réseau:', error);
-      throw error;
-    }
+    const response = await fetch(`${API_BASE_URL}/api/quotes/${id}`, {
+      method: 'DELETE'
+    });
+    if (!response.ok) throw new Error('Erreur lors de la suppression de la citation');
+    return response.json();
   }
 };
 
