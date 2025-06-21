@@ -6,12 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://citation-production.up.railway.app'] 
-    : '*',
-  credentials: true
-}));
+app.use(cors());  // Permettre toutes les origines en production pour le moment
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
