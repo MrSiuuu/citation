@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "text": "La vie est ce qui vous arrive pendant que vous êtes occupé à faire d'autres projets.",
+    "author": "John Lennon",
+    "category": "Vie",
+    "createdAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "text": "Je ne suis pas paresseux, je suis juste en mode économie d'énergie.",
+    "author": "Inconnu",
+    "category": "Humour",
+    "createdAt": "2024-01-16T10:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "text": "L'avenir appartient à ceux qui croient à la beauté de leurs rêves... et qui ont un bon réveil.",
+    "author": "Citation moderne",
+    "category": "Motivation",
+    "createdAt": "2024-01-17T10:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "text": "L'amour, c'est comme un pet : si tu dois forcer, c'est probablement de la merde.",
+    "author": "Sagesse populaire",
+    "category": "Amour",
+    "createdAt": "2024-01-18T10:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "text": "Le courage n'est pas l'absence de peur, mais la capacité de vaincre ce qui fait peur... surtout les lundis matin.",
+    "author": "Citation moderne",
+    "category": "Sagesse",
+    "createdAt": "2024-01-19T10:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "text": "Le succès, c'est tomber sept fois, se relever huit... et vérifier qu'il n'y a personne qui regarde.",
+    "author": "Proverbe moderne",
+    "category": "Succès",
+    "createdAt": "2024-01-20T10:00:00.000Z"
+  },
+  {
+    "id": 7,
+    "text": "Le bonheur, c'est quand ton code compile du premier coup... et que tu te réveilles.",
+    "author": "Développeur anonyme",
+    "category": "Bonheur",
+    "createdAt": "2024-01-21T10:00:00.000Z"
+  },
+  {
+    "id": 8,
+    "text": "La philosophie, c'est se demander pourquoi on se pose des questions qu'on ne comprend pas.",
+    "author": "Philosophe confus",
+    "category": "Philosophie",
+    "createdAt": "2024-01-22T10:00:00.000Z"
+  },
+  {
+    "id": 9,
+    "text": "L'amour, c'est partager sa dernière part de pizza. Le vrai amour, c'est la garder pour soi.",
+    "author": "Gourmet philosophe",
+    "category": "Amour",
+    "createdAt": "2024-01-23T10:00:00.000Z"
+  },
+  {
+    "id": 10,
+    "text": "La motivation, c'est comme le café : ça marche mieux le matin, et après 3 tasses, tu ne dors plus.",
+    "author": "Café addict",
+    "category": "Motivation",
+    "createdAt": "2024-01-24T10:00:00.000Z"
+  },
+  {
+    "id": 11,
+    "text": "La vie, c'est comme une boîte de chocolats : tu ne sais jamais lequel va te donner des caries.",
+    "author": "Dentiste philosophe",
+    "category": "Vie",
+    "createdAt": "2024-01-25T10:00:00.000Z"
+  },
+  {
+    "id": 12,
+    "text": "Le succès, c'est 1% d'inspiration, 99% de transpiration... et 100% de café.",
+    "author": "Entrepreneur",
+    "category": "Succès",
+    "createdAt": "2024-01-26T10:00:00.000Z"
+  },
+  {
+    "id": 13,
+    "text": "La sagesse, c'est savoir que tu ne sais rien. La stupidité, c'est le dire à voix haute.",
+    "author": "Socrate moderne",
+    "category": "Sagesse",
+    "createdAt": "2024-01-27T10:00:00.000Z"
+  },
+  {
+    "id": 14,
+    "text": "Le bonheur, c'est un lundi sans réunion, un vendredi avec pizza, et un dimanche sans alarme.",
+    "author": "Employé heureux",
+    "category": "Bonheur",
+    "createdAt": "2024-01-28T10:00:00.000Z"
+  },
+  {
+    "id": 15,
+    "text": "La philosophie, c'est réfléchir à des questions existentielles... puis commander une pizza.",
+    "author": "Philosophe affamé",
+    "category": "Philosophie",
+    "createdAt": "2024-01-29T10:00:00.000Z"
+  }
+]

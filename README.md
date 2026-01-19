@@ -1,6 +1,6 @@
 # Application de Citations
 
-Application web pour gérer et afficher des citations avec authentification utilisateur.
+Application web frontend pour afficher et gérer des citations. Les citations sont stockées dans un fichier JSON et persistées dans le localStorage du navigateur.
 
 ## 🚀 Démarrage rapide
 
@@ -16,102 +16,83 @@ git clone <votre-repo>
 cd citation
 ```
 
-2. **Installation et démarrage automatique**
+2. **Installer les dépendances**
 ```bash
-# Installer les dépendances backend
-cd backend
 npm install
+```
 
-# Démarrer le backend
-npm run dev
-
-# Dans un nouveau terminal, installer les dépendances frontend
-cd frontendWeb
-npm install
-
-# Démarrer le frontend
+3. **Démarrer l'application**
+```bash
 npm run dev
 ```
 
-## 📊 Accès aux services
+L'application sera accessible sur **http://localhost:5173**
 
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:3000
+## 📊 Structure du projet
 
-## 🗄️ Base de données
-
-### Configuration SQLite
-- **Type**: SQLite (fichier local)
-- **Fichier**: `backend/data/citation.db`
-- **Création automatique**: Les tables sont créées automatiquement au premier démarrage
-
-### Tables créées automatiquement
-- `users` - Authentification des utilisateurs
-- `quotes` - Citations avec timestamps
-
-## 🔧 Variables d'environnement
-
-Le fichier `.env` dans le dossier `backend` contient :
-```env
-JWT_SECRET=votre_secret_jwt_tres_long_et_complexe_ici_123456789
-PORT=3000
-NODE_ENV=development
-```
+- **Frontend**: Vue.js 3 avec Composition API
+- **Styling**: Tailwind CSS
+- **Routing**: Vue Router
+- **Données**: Fichier JSON (`public/citations.json`) + localStorage
 
 ## 📋 Fonctionnalités
 
-### API Endpoints
-- `GET /api/quotes` - Récupérer toutes les citations
-- `GET /api/quotes/random` - Citation aléatoire
-- `POST /api/quotes` - Ajouter une citation
-- `PUT /api/quotes/:id` - Modifier une citation
-- `DELETE /api/quotes/:id` - Supprimer une citation
-- `POST /api/auth/register` - Inscription
-- `POST /api/auth/login` - Connexion
+- ✅ Afficher une citation aléatoire
+- ✅ Voir toutes les citations
+- ✅ Ajouter une nouvelle citation
+- ✅ Modifier une citation existante
+- ✅ Supprimer une citation
+- ✅ Persistance des données dans le localStorage
 
-### Frontend
-- Vue.js 3 avec Composition API
-- Tailwind CSS pour le style
-- Vue Router pour la navigation
-- Gestion d'état avec Composition API
+## 📁 Fichiers importants
 
-## 🛠️ Commandes utiles
+- `public/citations.json` - Fichier JSON contenant les citations initiales
+- `src/services/quoteService.js` - Service pour gérer les citations (charge depuis JSON, sauvegarde dans localStorage)
+
+## 🔧 Commandes utiles
 
 ```bash
-# Démarrer le backend
-cd backend
+# Démarrer le serveur de développement
 npm run dev
 
-# Démarrer le frontend
-cd frontendWeb
-npm run dev
+# Construire pour la production
+npm run build
 
-# Voir la base de données SQLite
-# Utilisez un outil comme DB Browser for SQLite
+# Prévisualiser la build de production
+npm run preview
+
+# Linter le code
+npm run lint
+
+# Formater le code
+npm run format
 ```
 
-## 🔍 Dépannage
+## 💾 Gestion des données
 
-### Problème de connexion à la base de données
-1. Vérifier que le dossier `backend/data` existe
-2. Vérifier les permissions d'écriture
-3. Vérifier les logs du serveur
+Les citations sont initialement chargées depuis le fichier `public/citations.json`. Toutes les modifications (ajout, modification, suppression) sont sauvegardées dans le **localStorage** du navigateur.
 
-### Problème de ports
-Si les ports 3000 ou 5173 sont occupés, modifier les ports dans les configurations
+Pour réinitialiser les données :
+1. Ouvrez la console du navigateur (F12)
+2. Exécutez : `localStorage.removeItem('citations_app_data')`
+3. Rechargez la page
 
-### Réinitialiser la base de données
-```bash
-# Supprimer le fichier de base de données
-rm backend/data/citation.db
+## 🎨 Technologies utilisées
 
-# Redémarrer le serveur (la base sera recréée automatiquement)
+- **Vue.js 3** - Framework JavaScript progressif
+- **Vite** - Build tool rapide
+- **Tailwind CSS** - Framework CSS utilitaire
+- **Vue Router** - Router officiel pour Vue.js
+
+## 📝 Format des citations
+
+Chaque citation dans le fichier JSON doit avoir la structure suivante :
+
+```json
+{
+  "id": 1,
+  "text": "Le texte de la citation",
+  "author": "Nom de l'auteur",
+  "createdAt": "2024-01-15T10:00:00.000Z"
+}
 ```
-
-## ✅ Avantages de SQLite
-
-- ✅ Pas besoin d'installer de serveur de base de données
-- ✅ Fichier unique, facile à sauvegarder
-- ✅ Fonctionne immédiatement
-- ✅ Parfait pour le développement et les petits projets
-- ✅ Pas de configuration complexe 
