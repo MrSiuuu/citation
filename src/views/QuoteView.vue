@@ -11,10 +11,10 @@
               class="w-20 h-20 mx-auto object-contain hover:scale-110 transform transition-all duration-300"
             />
           </RouterLink>
-          <h1 class="text-3xl font-bold bg-gradient-to-r from-green-600 to-yellow-500 bg-clip-text text-transparent mb-2">
+          <h1 class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-600 to-yellow-500 bg-clip-text text-transparent mb-2">
             Westaf-Vibe
           </h1>
-          <p class="text-gray-600">Votre source d'inspiration quotidienne</p>
+          <p class="text-sm sm:text-base text-gray-600">Votre source d'inspiration quotidienne</p>
         </div>
 
         <!-- Citation -->
@@ -31,7 +31,7 @@
           </div>
 
           <!-- Texte de la citation -->
-          <blockquote class="text-2xl md:text-3xl font-serif italic text-gray-800 mb-6 text-center leading-relaxed">
+          <blockquote class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif italic text-gray-800 mb-6 text-center leading-relaxed px-2">
             "{{ quote.text }}"
           </blockquote>
 

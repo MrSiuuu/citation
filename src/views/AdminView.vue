@@ -6,10 +6,10 @@
         <div class="bg-white rounded-sm shadow-2xl p-6 mb-6 border-2 border-green-300">
           <div class="flex justify-between items-center">
             <div>
-              <h1 class="text-3xl font-bold mb-2 bg-gradient-to-r from-green-400 to-yellow-500 bg-clip-text text-transparent">
+              <h1 class="text-2xl sm:text-3xl font-bold mb-2 bg-gradient-to-r from-green-400 to-yellow-500 bg-clip-text text-transparent">
                 Espace Administrateur
               </h1>
-              <p class="text-gray-600">Gestion complète de Westaf-Vibe</p>
+              <p class="text-sm sm:text-base text-gray-600">Gestion complète de Westaf-Vibe</p>
             </div>
             <button
               @click="handleLogout"
@@ -39,7 +39,7 @@
         <!-- Gestion des citations -->
         <div class="bg-white rounded-sm shadow-2xl p-6 mb-6 border-2 border-green-300">
           <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-gray-800">Gestion des Citations</h2>
+            <h2 class="text-xl sm:text-2xl font-bold text-gray-800">Gestion des Citations</h2>
             <button
               @click="showAddForm = !showAddForm"
               class="bg-gradient-to-r from-green-600 to-yellow-500 hover:from-green-700 hover:to-yellow-600 text-white font-bold py-2 px-4 rounded-sm transition-all duration-300 hover:scale-105"
@@ -106,27 +106,27 @@
               :key="quote.id"
               class="bg-white rounded-sm p-4 border-2 border-green-200 hover:border-green-500 transition-all duration-300"
             >
-              <div class="flex justify-between items-start">
+              <div class="flex flex-col sm:flex-row justify-between items-start gap-3">
                 <div class="flex-1">
-                  <p class="text-lg italic text-gray-800 mb-2">"{{ quote.text }}"</p>
-                  <div class="flex items-center gap-4 text-sm">
+                  <p class="text-base sm:text-lg italic text-gray-800 mb-2">"{{ quote.text }}"</p>
+                  <div class="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
                     <span class="text-green-400 font-semibold">— {{ quote.author }}</span>
                     <span class="px-3 py-1 bg-green-900 text-green-300 rounded-full text-xs">
                       {{ quote.category }}
                     </span>
                   </div>
                 </div>
-                <div class="flex gap-2 ml-4">
+                <div class="flex gap-2 sm:ml-4 w-full sm:w-auto">
                   <button
                     @click="handleEdit(quote)"
-                    class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-sm transition-all duration-300 hover:scale-105"
+                    class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-medium rounded-sm transition-all duration-300 hover:scale-105 flex-1 sm:flex-none"
                     title="Modifier"
                   >
                     Modifier
                   </button>
                   <button
                     @click="handleDelete(quote.id)"
-                    class="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-sm transition-all duration-300 hover:scale-105"
+                    class="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs sm:text-sm font-medium rounded-sm transition-all duration-300 hover:scale-105 flex-1 sm:flex-none"
                     title="Supprimer"
                   >
                     Supprimer
@@ -139,7 +139,7 @@
 
         <!-- Gestion des catégories -->
           <div class="bg-white rounded-sm shadow-2xl p-6 border-2 border-green-300">
-            <h2 class="text-2xl font-bold mb-6 text-gray-800">Gestion des Catégories</h2>
+            <h2 class="text-xl sm:text-2xl font-bold mb-6 text-gray-800">Gestion des Catégories</h2>
           
           <div class="mb-4">
             <input

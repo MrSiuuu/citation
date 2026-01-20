@@ -6,10 +6,10 @@
         <div class="grid md:grid-cols-2 gap-8 items-center">
           <!-- Formulaire à gauche -->
           <div class="bg-white border-2 border-green-300 shadow-2xl rounded-sm p-8">
-            <h2 class="text-3xl font-bold mb-4 text-gray-800 text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-gray-800 text-center">
               Entrez le code
             </h2>
-            <p class="text-gray-600 text-center mb-6">
+            <p class="text-sm sm:text-base text-gray-600 text-center mb-6">
               Pour ajouter une citation ou accéder au dashboard
             </p>
             
@@ -57,7 +57,7 @@
         <div class="grid md:grid-cols-2 gap-8 items-start">
           <!-- Formulaire à gauche -->
           <div>
-            <h2 class="text-3xl font-bold mb-6 text-gray-800 border-b-2 border-green-300 pb-4">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-800 border-b-2 border-green-300 pb-4">
               Ajouter une citation
             </h2>
             

@@ -100,26 +100,14 @@
             </div>
           </div>
 
-          <h1 class="text-5xl md:text-6xl font-bold mb-4 animate-fade-in-up">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in-up px-4">
             Découvrez l'inspiration quotidienne
           </h1>
-          <p class="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in-up" style="animation-delay: 0.2s;">
+          <p class="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 opacity-90 animate-fade-in-up px-4" style="animation-delay: 0.2s;">
             Des milliers de citations pour illuminer votre journée
           </p>
 
-          <!-- Bouton Nouvelle Citation avec animation drôle -->
-          <button
-            @click="fetchRandomQuote"
-            :disabled="randomLoading"
-              class="bg-white text-green-600 font-bold py-4 px-8 rounded-full text-lg hover:scale-110 transform transition-all duration-300 shadow-2xl hover:shadow-3xl hover:rotate-2 animate-pulse-once"
-          >
-            <span class="flex items-center justify-center">
-              <svg class="w-6 h-6 mr-2 animate-spin-slow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-              {{ randomLoading ? 'Chargement...' : 'Nouvelle Citation' }}
-            </span>
-          </button>
+          <!-- (Bouton déplacé dans la carte de citation) -->
         </div>
       </div>
     </section>
@@ -130,52 +118,24 @@
         <div class="max-w-3xl mx-auto">
           <div
             v-if="randomQuote"
-            class="bg-white border-2 border-green-300 rounded-sm shadow-2xl p-8 md:p-12 transform transition-all duration-500 hover:scale-105 hover:border-green-500 hover:shadow-green-200"
+            class="relative bg-white border-2 border-green-300 rounded-sm shadow-2xl p-6 sm:p-8 md:p-12 transform transition-all duration-500 hover:scale-105 hover:border-green-500 hover:shadow-green-200"
             :class="{ 'animate-shake': isShaking }"
           >
-            <!-- Logo du site -->
-            <div class="text-center mb-6">
-              <div class="inline-block w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center animate-wiggle p-1 bg-white shadow-lg overflow-hidden">
-                <img 
-                  src="/favicon1.png" 
-                  alt="Westaf-Vibe Logo" 
-                  class="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            <!-- Texte de la citation -->
-            <blockquote class="text-2xl md:text-3xl font-serif italic text-gray-800 mb-6 text-center leading-relaxed">
-              "{{ randomQuote.text }}"
-            </blockquote>
-
-            <!-- Auteur -->
-            <p class="text-right text-lg font-semibold text-green-400 mb-6">
-              — {{ randomQuote.author }}
-            </p>
-
-            <!-- Catégorie -->
-            <div class="text-center mb-6">
-              <span class="inline-block px-4 py-2 bg-gradient-to-r from-green-900 to-yellow-900 text-green-300 rounded-full text-sm font-medium border border-green-700">
-                {{ randomQuote.category }}
-              </span>
-            </div>
-
-            <!-- Bouton de partage -->
-            <div class="flex justify-center">
+            <!-- Partager (en haut à droite) -->
+            <div class="absolute top-6 right-6 z-20">
               <div class="relative share-menu-container">
                 <button
                   @click="showShareMenu = !showShareMenu"
-                  class="flex items-center px-8 py-3 bg-gradient-to-r from-green-600 via-yellow-500 to-orange-500 text-white rounded-sm font-semibold hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl"
+                  class="flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-white bg-opacity-80 hover:bg-opacity-100 text-green-600 rounded-full shadow-md hover:shadow-lg hover:scale-105 transform transition-all duration-300 border-2 border-green-300"
+                  title="Partager"
                 >
-                  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                   </svg>
-                  Partager cette citation
                 </button>
-                
+
                 <!-- Menu de partage -->
-                <div v-if="showShareMenu" class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-white border-2 border-green-300 rounded-sm shadow-2xl p-4 min-w-[280px] z-50">
+                <div v-if="showShareMenu" class="absolute top-full right-0 mt-2 bg-white border-2 border-green-300 rounded-sm shadow-2xl p-4 min-w-[280px]">
                   <div class="space-y-3">
                     <button
                       @click="shareOnWhatsApp"
@@ -202,6 +162,54 @@
                 </div>
               </div>
             </div>
+
+            <!-- Logo du site -->
+            <div class="text-center mb-6">
+              <div
+                class="inline-block w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center animate-wiggle p-1 bg-white shadow-lg overflow-hidden"
+                :class="{ 'logo-spin-once': isTopLogoSpinning }"
+              >
+                <img 
+                  src="/favicon1.png" 
+                  alt="Westaf-Vibe Logo" 
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            <!-- Texte de la citation -->
+            <blockquote class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif italic text-gray-800 mb-6 text-center leading-relaxed px-2">
+              "{{ randomQuote.text }}"
+            </blockquote>
+
+            <!-- Auteur -->
+            <p class="text-right text-lg font-semibold text-green-400 mb-6">
+              — {{ randomQuote.author }}
+            </p>
+
+            <!-- Action (nouvelle citation) -->
+            <div class="flex items-center justify-center mt-2 mb-4">
+              <button
+                @click="fetchRandomQuote"
+                :disabled="randomLoading"
+                class="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-white border-2 border-green-300 rounded-full hover:scale-115 transform transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden p-2"
+                title="Nouvelle citation"
+              >
+                <img
+                  src="/favicon1.png"
+                  alt="Nouvelle citation"
+                  class="w-full h-full object-cover transition-transform duration-300"
+                  :class="{ 'animate-spin-slow': randomLoading }"
+                />
+              </button>
+            </div>
+
+            <!-- Catégorie en bas à droite -->
+            <div class="flex justify-end">
+              <span class="inline-block px-4 py-2 bg-gradient-to-r from-green-900 to-yellow-900 text-green-300 rounded-full text-sm font-medium border border-green-700">
+                {{ randomQuote.category }}
+              </span>
+            </div>
           </div>
 
           <!-- Loading state -->
@@ -217,21 +225,21 @@
     <section class="py-16 bg-gradient-to-br from-yellow-50 to-orange-50">
       <div class="container mx-auto px-4">
         <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold text-gray-800 mb-4">Explorez par catégorie</h2>
-          <p class="text-xl text-gray-600">Trouvez l'inspiration qui vous correspond</p>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4 px-4">Explorez par catégorie</h2>
+          <p class="text-base sm:text-lg md:text-xl text-gray-600 px-4">Trouvez l'inspiration qui vous correspond</p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto px-2">
           <div
             v-for="category in categories"
             :key="category.name"
             @click="filterByCategory(category.name)"
-            class="relative overflow-hidden rounded-sm p-6 text-white cursor-pointer transform transition-all duration-300 hover:scale-110 hover:rotate-2 hover:z-10 shadow-lg"
+            class="relative overflow-hidden rounded-sm p-4 sm:p-5 md:p-6 text-white cursor-pointer transform transition-all duration-300 hover:scale-110 hover:rotate-2 hover:z-10 shadow-lg"
             :style="{ background: category.gradient }"
           >
             <div class="text-center">
-              <h3 class="font-bold text-lg mb-2">{{ category.name }}</h3>
-              <p class="text-sm opacity-90">{{ category.count }} citations</p>
+              <h3 class="font-bold text-sm sm:text-base md:text-lg mb-1 sm:mb-2">{{ category.name }}</h3>
+              <p class="text-xs sm:text-sm opacity-90">{{ category.count }} citations</p>
             </div>
             <!-- Effet de brillance au survol -->
             <div class="absolute inset-0 bg-white opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
@@ -244,19 +252,19 @@
     <section class="py-16 bg-gradient-to-br from-green-50 via-yellow-50 to-orange-50">
       <div class="container mx-auto px-4">
         <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold text-gray-800 mb-4">Pourquoi Westaf-Vibe ?</h2>
-          <p class="text-xl text-gray-600">Une expérience unique pour découvrir et partager des citations</p>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4 px-4">Pourquoi Westaf-Vibe ?</h2>
+          <p class="text-base sm:text-lg md:text-xl text-gray-600 px-4">Une expérience unique pour découvrir et partager des citations</p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <div
             v-for="(feature, index) in features"
             :key="index"
-            class="bg-white border-2 border-green-200 rounded-sm p-8 shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:border-green-500 hover:shadow-green-200"
+            class="bg-white border-2 border-green-200 rounded-sm p-6 sm:p-7 md:p-8 shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:border-green-500 hover:shadow-green-200"
             :style="{ animationDelay: `${index * 0.1}s` }"
           >
-            <h3 class="text-xl font-bold text-center mb-3 text-gray-800">{{ feature.title }}</h3>
-            <p class="text-gray-600 text-center">{{ feature.description }}</p>
+            <h3 class="text-lg sm:text-xl font-bold text-center mb-3 text-gray-800">{{ feature.title }}</h3>
+            <p class="text-sm sm:text-base text-gray-600 text-center">{{ feature.description }}</p>
           </div>
         </div>
       </div>
@@ -274,6 +282,7 @@ const randomLoading = ref(false);
 const randomError = ref(null);
 const isShaking = ref(false);
 const showShareMenu = ref(false);
+const isTopLogoSpinning = ref(false);
 
 const quotes = ref([]);
 const isLoading = ref(true);
@@ -306,18 +315,18 @@ const categories = computed(() => {
 
 const features = [
   {
-    title: 'Citations Aléatoires',
-    description: 'Découvrez chaque jour de nouvelles citations inspirantes sélectionnées pour vous',
+    title: 'Chaque refresh c’est un nouveau “hein??”',
+    description: 'Découvre des citations au hasard… parfois sages, parfois juste dangereuses.',
     gradient: 'linear-gradient(135deg, #f093fb, #f5576c)'
   },
   {
-    title: 'Favoris Personnalisés',
-    description: 'Sauvegardez vos citations préférées et créez votre collection personnelle',
+    title: 'Y’a des citations… faut pas les perdre.',
+    description: 'Garde tes meilleures pépites ici, sinon demain tu vas dire “c’était quoi déjà la phrase là ?”',
     gradient: 'linear-gradient(135deg, #4facfe, #00f2fe)'
   },
   {
-    title: 'Partage Facile',
-    description: 'Partagez instantanément vos citations favorites sur tous les réseaux sociaux',
+    title: 'Tu ris, tu partages, tu déclenches le groupe WhatsApp.',
+    description: 'Envoie tes citations préférées sur les réseaux en 2 secondes.',
     gradient: 'linear-gradient(135deg, #43e97b, #38f9d7)'
   }
 ];
@@ -327,6 +336,7 @@ const fetchRandomQuote = async () => {
     randomLoading.value = true;
     randomError.value = null;
     isShaking.value = true;
+    isTopLogoSpinning.value = true;
     
     const response = await quoteService.getRandomQuote();
     randomQuote.value = response;
@@ -336,6 +346,10 @@ const fetchRandomQuote = async () => {
     setTimeout(() => {
       isShaking.value = false;
     }, 500);
+    // Tourner le logo du haut à chaque nouvelle citation
+    setTimeout(() => {
+      isTopLogoSpinning.value = false;
+    }, 800);
   } catch (err) {
     randomError.value = "Erreur lors de la récupération de la citation";
     console.error(err);
@@ -513,6 +527,10 @@ onUnmounted(() => {
 
 .animate-spin-slow {
   animation: spin-slow 3s linear infinite;
+}
+
+.logo-spin-once {
+  animation: spin-slow 0.8s linear 1;
 }
 
 .animate-bounce-on-hover:hover {

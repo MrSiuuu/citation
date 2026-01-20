@@ -10,22 +10,22 @@
               <img 
                 src="/favicon1.png" 
                 alt="Westaf-Vibe Logo" 
-                class="w-14 h-14 md:w-16 md:h-16 object-contain group-hover:scale-105 transform transition-all duration-300 rounded-full"
+                class="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain group-hover:scale-105 transform transition-all duration-300 rounded-full"
               />
             </RouterLink>
           </div>
           
           <!-- Menu au milieu -->
-          <nav class="flex flex-wrap justify-center gap-8 md:gap-12 flex-1">
+          <nav class="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-12 flex-1">
             <RouterLink 
               to="/" 
-              class="text-gray-700 hover:text-green-600 transition-colors font-medium text-base relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-green-600 after:to-yellow-500 hover:after:w-full after:transition-all after:duration-300"
+              class="text-gray-700 hover:text-green-600 transition-colors font-medium text-sm sm:text-base relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-green-600 after:to-yellow-500 hover:after:w-full after:transition-all after:duration-300"
             >
               Accueil
             </RouterLink>
             <RouterLink 
               to="/about" 
-              class="text-gray-700 hover:text-green-600 transition-colors font-medium text-base relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-green-600 after:to-yellow-500 hover:after:w-full after:transition-all after:duration-300"
+              class="text-gray-700 hover:text-green-600 transition-colors font-medium text-sm sm:text-base relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-green-600 after:to-yellow-500 hover:after:w-full after:transition-all after:duration-300"
             >
               À propos
             </RouterLink>
@@ -35,7 +35,7 @@
           <div class="flex-shrink-0">
             <RouterLink
               to="/contribute"
-              class="bg-gradient-to-r from-green-600 via-yellow-500 to-orange-500 hover:from-green-700 hover:via-yellow-600 hover:to-orange-600 text-white px-5 py-2.5 rounded-sm font-semibold text-sm hover:scale-105 transform transition-all duration-300 shadow-md hover:shadow-lg"
+              class="bg-gradient-to-r from-green-600 via-yellow-500 to-orange-500 hover:from-green-700 hover:via-yellow-600 hover:to-orange-600 text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm font-semibold text-xs sm:text-sm hover:scale-105 transform transition-all duration-300 shadow-md hover:shadow-lg"
             >
               Ajouter Citation
             </RouterLink>
@@ -51,41 +51,33 @@
     <!-- Footer -->
     <footer class="bg-gradient-to-r from-green-600 to-yellow-500 border-t border-green-400 text-white py-8 mt-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-3 gap-8 mb-8">
-          <div>
-            <div class="flex items-center gap-3 mb-4">
-              <img 
-                src="/favicon1.png" 
-                alt="Westaf-Vibe Logo" 
-                class="w-10 h-10 object-contain"
-              />
-              <h3 class="text-2xl font-bold bg-gradient-to-r from-green-400 to-yellow-500 bg-clip-text text-transparent">
-                "Westaf-Vibe
-              </h3>
-            </div>
-            <p class="text-white opacity-90">
-              Votre source quotidienne d'inspiration et de sagesse à travers les plus belles citations.
-            </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-8">
+          <div class="flex justify-center md:justify-start">
+            <img 
+              src="/favicon1.png" 
+              alt="Westaf-Vibe Logo" 
+              class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain"
+            />
           </div>
-          <div>
-            <h4 class="font-bold mb-4 text-white">Navigation</h4>
+          <div class="text-center sm:text-left">
+            <h4 class="font-bold mb-4 text-white text-lg">Navigation</h4>
             <ul class="space-y-2 text-white opacity-90">
               <li><RouterLink to="/" class="hover:text-yellow-200 transition-colors">Accueil</RouterLink></li>
               <li><RouterLink to="/about" class="hover:text-yellow-200 transition-colors">À propos</RouterLink></li>
             </ul>
           </div>
-          <div>
-            <h4 class="font-bold mb-4 text-white">Catégories</h4>
+          <div class="text-center sm:text-left">
+            <h4 class="font-bold mb-4 text-white text-lg">Catégories</h4>
             <ul class="space-y-2 text-white opacity-90">
-              <li><a href="#" class="hover:text-yellow-200 transition-colors">Motivation</a></li>
-              <li><a href="#" class="hover:text-yellow-200 transition-colors">Amour</a></li>
-              <li><a href="#" class="hover:text-yellow-200 transition-colors">Sagesse</a></li>
-              <li><a href="#" class="hover:text-yellow-200 transition-colors">Succès</a></li>
+              <li>Motivation</li>
+              <li>Amour</li>
+              <li>Sagesse</li>
+              <li>Succès</li>
             </ul>
           </div>
         </div>
-        <div class="border-t border-green-400 pt-8 text-center text-white opacity-90">
-          <p>© {{ new Date().getFullYear() }} Westaf-Vibe. Tous droits réservés. | KOUYATE Issa</p>
+        <div class="border-t border-green-400 pt-6 sm:pt-8 text-center text-white opacity-90">
+          <p class="text-sm sm:text-base px-4">© {{ new Date().getFullYear() }} Westaf-Vibe. Tous droits réservés. | MrSIUUU</p>
         </div>
       </div>
     </footer>

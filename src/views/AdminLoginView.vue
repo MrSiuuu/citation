@@ -10,12 +10,12 @@
               alt="Westaf-Vibe Logo" 
               class="w-12 h-12 object-contain"
             />
-            <h1 class="text-4xl font-bold bg-gradient-to-r from-green-400 to-yellow-500 bg-clip-text text-transparent">
+            <h1 class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-green-400 to-yellow-500 bg-clip-text text-transparent">
               "Westaf-Vibe
             </h1>
           </div>
-          <h2 class="text-2xl font-bold text-gray-800 mb-2">Accès Administrateur</h2>
-          <p class="text-gray-600">Entrez le code d'accès pour continuer</p>
+          <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Accès Administrateur</h2>
+          <p class="text-sm sm:text-base text-gray-600">Entrez le code d'accès pour continuer</p>
         </div>
 
         <!-- Formulaire -->
