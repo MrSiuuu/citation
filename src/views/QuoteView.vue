@@ -14,7 +14,7 @@
           <h1 class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-600 to-yellow-500 bg-clip-text text-transparent mb-2">
             Westaf-Vibe
           </h1>
-          <p class="text-sm sm:text-base text-gray-600">Votre source d'inspiration quotidienne</p>
+          <p class="text-sm sm:text-base text-gray-600">Ta dose quotidienne de débilité</p>
         </div>
 
         <!-- Citation -->

@@ -389,7 +389,7 @@ const getShareLink = () => {
 const shareOnWhatsApp = () => {
   if (!randomQuote.value) return;
 
-  const quoteText = `"${randomQuote.value.text}"\n\n— ${randomQuote.value.author}\n\n📖 Découvrez plus de citations inspirantes sur Westaf-Vibe :\n${getShareLink()}\n\n✨ Westaf-Vibe - Votre source d'inspiration quotidienne`;
+  const quoteText = `"${randomQuote.value.text}"\n\n— ${randomQuote.value.author}\n\nDécouvrez plus de citations sur Westaf-Vibe :\n${getShareLink()}\n\nWestaf-Vibe : ta dose quotidienne de débilité.`;
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(quoteText)}`;
 
   window.open(whatsappUrl, '_blank');
@@ -400,7 +400,7 @@ const shareOnWhatsApp = () => {
 const copyLink = async (event) => {
   if (!randomQuote.value) return;
 
-  const shareText = `"${randomQuote.value.text}"\n\n— ${randomQuote.value.author}\n\n📖 Découvrez cette citation et bien plus sur Westaf-Vibe :\n${getShareLink()}\n\n✨ Westaf-Vibe - Votre source d'inspiration quotidienne`;
+  const shareText = `"${randomQuote.value.text}"\n\n— ${randomQuote.value.author}\n\nDécouvrez cette citation et bien plus sur Westaf-Vibe :\n${getShareLink()}\n\nWestaf-Vibe : ta dose quotidienne de débilité.`;
 
   try {
     await navigator.clipboard.writeText(shareText);
