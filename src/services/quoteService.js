@@ -1,5 +1,6 @@
 // Service pour gérer les citations depuis un fichier JSON et localStorage
 const STORAGE_KEY = 'citations_app_data';
+const CATEGORIES_KEY = 'westaf_categories';
 const JSON_FILE_PATH = '/citations.json';
 
 // Initialiser les citations depuis le JSON si localStorage est vide
@@ -153,6 +154,62 @@ export const quoteService = {
     } catch (error) {
       console.error('Erreur:', error);
       throw error;
+    }
+  },
+
+  // Gestion des catégories
+  getCategories() {
+    try {
+      const stored = localStorage.getItem(CATEGORIES_KEY);
+      if (stored) {
+        return JSON.parse(stored);
+      }
+      // Catégories par défaut
+      const defaultCategories = ['Amour', 'Motivation', 'Vie', 'Sagesse', 'Succès', 'Bonheur', 'Philosophie', 'Humour'];
+      localStorage.setItem(CATEGORIES_KEY, JSON.stringify(defaultCategories));
+      return defaultCategories;
+    } catch (error) {
+      console.error('Erreur lors de la récupération des catégories:', error);
+      return ['Amour', 'Motivation', 'Vie', 'Sagesse', 'Succès', 'Bonheur', 'Philosophie', 'Humour'];
+    }
+  },
+
+  saveCategories(categories) {
+    try {
+      localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categories));
+      return true;
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde des catégories:', error);
+      return false;
+    }
+  },
+
+  addCategory(categoryName) {
+    try {
+      const categories = this.getCategories();
+      if (!categories.includes(categoryName.trim())) {
+        categories.push(categoryName.trim());
+        this.saveCategories(categories);
+      }
+      return categories;
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout de la catégorie:', error);
+      return this.getCategories();
+    }
+  },
+
+  deleteCategory(categoryName) {
+    try {
+      const categories = this.getCategories();
+      const index = categories.indexOf(categoryName);
+      if (index > -1) {
+        categories.splice(index, 1);
+        this.saveCategories(categories);
+      }
+      return categories;
+    } catch (error) {
+      console.error('Erreur lors de la suppression de la catégorie:', error);
+      return this.getCategories();
     }
   }
 }; 

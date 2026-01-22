@@ -207,7 +207,7 @@ const newQuote = ref({
   category: 'Humour'
 });
 
-const allCategories = ref(['Amour', 'Motivation', 'Vie', 'Sagesse', 'Succès', 'Bonheur', 'Philosophie', 'Humour']);
+const allCategories = ref(quoteService.getCategories());
 
 const uniqueCategories = computed(() => {
   const cats = new Set();
@@ -267,17 +267,16 @@ const handleDelete = async (id) => {
 
 const addCategory = () => {
   if (newCategory.value.trim() && !allCategories.value.includes(newCategory.value.trim())) {
-    allCategories.value.push(newCategory.value.trim());
+    const updatedCategories = quoteService.addCategory(newCategory.value.trim());
+    allCategories.value = updatedCategories;
     newCategory.value = '';
   }
 };
 
 const deleteCategory = (category) => {
   if (confirm(`Supprimer la catégorie "${category}" ? Les citations de cette catégorie ne seront pas supprimées.`)) {
-    const index = allCategories.value.indexOf(category);
-    if (index > -1) {
-      allCategories.value.splice(index, 1);
-    }
+    const updatedCategories = quoteService.deleteCategory(category);
+    allCategories.value = updatedCategories;
   }
 };
 
@@ -358,6 +357,8 @@ onMounted(() => {
   if (!checkAccessValidity()) {
     return;
   }
+  // Charger les catégories depuis localStorage
+  allCategories.value = quoteService.getCategories();
   loadQuotes();
   
   // Vérifier toutes les minutes si l'accès est encore valide

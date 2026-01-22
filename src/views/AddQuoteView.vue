@@ -102,14 +102,7 @@
                     v-model="newQuote.category"
                     class="w-full px-4 py-3 bg-green-50 border-2 border-green-200 rounded-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
                   >
-                    <option value="Amour">Amour</option>
-                    <option value="Motivation">Motivation</option>
-                    <option value="Vie">Vie</option>
-                    <option value="Sagesse">Sagesse</option>
-                    <option value="Succès">Succès</option>
-                    <option value="Bonheur">Bonheur</option>
-                    <option value="Philosophie">Philosophie</option>
-                    <option value="Humour">Humour</option>
+                    <option v-for="cat in availableCategories" :key="cat" :value="cat">{{ cat }}</option>
                   </select>
                 </div>
                 
@@ -166,10 +159,12 @@ const errorMessages = [
   "Sale chien, casse-toi si t'as pas le code"
 ]
 
+const availableCategories = ref(quoteService.getCategories())
+
 const newQuote = ref({
   text: '',
   author: '',
-  category: 'Humour'
+  category: availableCategories.value[0] || 'Humour'
 })
 const isSubmitting = ref(false)
 const error = ref(null)
@@ -272,6 +267,9 @@ const addQuote = async () => {
 }
 
 onMounted(() => {
+  // Charger les catégories depuis localStorage
+  availableCategories.value = quoteService.getCategories()
+  
   // Vérifier si le code est encore valide (10 minutes)
   if (isCodeStillValid()) {
     const dashboardAccess = sessionStorage.getItem('dashboard_access') === 'true'
@@ -292,6 +290,8 @@ onMounted(() => {
       // Si on était sur le formulaire et que le code expire, on reste sur le formulaire
       // (pas de redirection forcée, juste réinitialiser l'état)
     }
+    // Recharger les catégories au cas où elles ont été modifiées
+    availableCategories.value = quoteService.getCategories()
   }, 60000) // Vérifier toutes les minutes
 })
 </script>

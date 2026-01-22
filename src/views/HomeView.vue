@@ -312,6 +312,9 @@ const isLoading = ref(true);
 
 // Catégories avec icônes et dégradés
 const categories = computed(() => {
+  // Récupérer les catégories depuis localStorage (celles gérées par l'admin)
+  const availableCategories = quoteService.getCategories();
+
   const categoryCounts = quotes.value.reduce((acc, quote) => {
     const cat = quote.category || 'Autre';
     acc[cat] = (acc[cat] || 0) + 1;
@@ -329,11 +332,15 @@ const categories = computed(() => {
     'Humour': { gradient: 'linear-gradient(135deg, #ffecd2, #fcb69f)' }
   };
 
-  return Object.keys(categoryData).map(name => ({
+  // Filtrer pour ne garder que les catégories disponibles ET qui ont des citations
+  // D'abord, ne garder que les catégories qui sont dans availableCategories
+  const validCategories = availableCategories.filter(cat => categoryCounts[cat] > 0);
+
+  return validCategories.map(name => ({
     name,
-    ...categoryData[name],
+    gradient: categoryData[name]?.gradient || 'linear-gradient(135deg, #a8e063, #56ab2f)',
     count: categoryCounts[name] || 0
-  })).filter(cat => cat.count > 0);
+  }));
 });
 
 const features = [
@@ -484,6 +491,11 @@ onMounted(async () => {
 
   // Ajouter l'écouteur pour fermer le menu
   document.addEventListener('click', handleClickOutside);
+
+  // Recharger les citations périodiquement pour mettre à jour les catégories
+  setInterval(async () => {
+    await loadQuotes();
+  }, 30000); // Toutes les 30 secondes
 });
 
 onUnmounted(() => {
