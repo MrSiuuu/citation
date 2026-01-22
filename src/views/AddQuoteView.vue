@@ -150,8 +150,8 @@ import { quoteService } from '../services/quoteService'
 
 const router = useRouter()
 
-const ACCESS_CODE = '9327101214'
-const DASHBOARD_CODE = 'Westafvibes9327101214@'
+const ACCESS_CODE = import.meta.env.VITE_ACCESS_CODE
+const DASHBOARD_CODE = import.meta.env.VITE_DASHBOARD_CODE
 const accessCode = ref('')
 const isCodeValid = ref(false)
 const isDashboardAccess = ref(false)

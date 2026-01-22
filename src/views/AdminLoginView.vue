@@ -5,9 +5,9 @@
         <!-- Logo/Titre -->
         <div class="text-center mb-8">
           <div class="flex items-center justify-center gap-3 mb-4">
-            <img 
-              src="/favicon1.png" 
-              alt="Westaf-Vibe Logo" 
+            <img
+              src="/favicon1.png"
+              alt="Westaf-Vibe Logo"
               class="w-12 h-12 object-contain"
             />
             <h1 class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-green-400 to-yellow-500 bg-clip-text text-transparent">
@@ -64,7 +64,7 @@ const accessCode = ref('');
 const error = ref(null);
 const loading = ref(false);
 
-const ADMIN_CODE = '9327101214';
+const ADMIN_CODE = import.meta.env.VITE_ADMIN_CODE;
 
 const handleLogin = () => {
   error.value = null;
