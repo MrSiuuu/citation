@@ -8,9 +8,9 @@
           <div class="absolute inset-0 border-8 border-white border-t-transparent rounded-full animate-spin"></div>
           <!-- Logo au centre -->
           <div class="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center">
-            <img 
-              src="/favicon1.png" 
-              alt="Westaf-Vibe Logo" 
+            <img
+              src="/favicon1.png"
+              alt="Westaf-Vibe Logo"
               class="w-full h-full object-contain animate-pulse"
             />
           </div>
@@ -25,64 +25,64 @@
     <section class="relative bg-gradient-to-br from-green-400 via-yellow-400 to-orange-400 text-white py-20 overflow-hidden">
       <!-- Logo qui rebondit en fond -->
       <div class="absolute inset-0 overflow-hidden">
-        <img 
-          src="/favicon1.png" 
-          alt="Logo" 
-          class="absolute top-10 left-10 w-32 h-32 object-contain rounded-full animate-bounce opacity-20" 
+        <img
+          src="/favicon1.png"
+          alt="Logo"
+          class="absolute top-10 left-10 w-32 h-32 object-contain rounded-full animate-bounce opacity-20"
           style="animation-delay: 0s; animation-duration: 3s;"
         />
-        <img 
-          src="/favicon1.png" 
-          alt="Logo" 
-          class="absolute top-40 right-20 w-28 h-28 object-contain rounded-full animate-bounce opacity-40" 
+        <img
+          src="/favicon1.png"
+          alt="Logo"
+          class="absolute top-40 right-20 w-28 h-28 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 1s; animation-duration: 4s;"
         />
-        <img 
-          src="/favicon1.png" 
-          alt="Logo" 
-          class="absolute bottom-20 left-1/4 w-36 h-36 object-contain rounded-full animate-bounce opacity-40" 
+        <img
+          src="/favicon1.png"
+          alt="Logo"
+          class="absolute bottom-20 left-1/4 w-36 h-36 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 2s; animation-duration: 5s;"
         />
-        <img 
-          src="/favicon1.png" 
-          alt="Logo" 
-          class="absolute top-1/2 right-1/3 w-24 h-24 object-contain rounded-full animate-bounce opacity-40" 
+        <img
+          src="/favicon1.png"
+          alt="Logo"
+          class="absolute top-1/2 right-1/3 w-24 h-24 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 1.5s; animation-duration: 3.5s;"
         />
-        <img 
-          src="/favicon1.png" 
-          alt="Logo" 
-          class="absolute bottom-40 right-1/4 w-32 h-32 object-contain rounded-full animate-bounce opacity-40" 
+        <img
+          src="/favicon1.png"
+          alt="Logo"
+          class="absolute bottom-40 right-1/4 w-32 h-32 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 0.5s; animation-duration: 4.5s;"
         />
-        <img 
-          src="/favicon1.png" 
-          alt="Logo" 
-          class="absolute top-1/4 left-1/3 w-28 h-28 object-contain rounded-full animate-bounce opacity-40" 
+        <img
+          src="/favicon1.png"
+          alt="Logo"
+          class="absolute top-1/4 left-1/3 w-28 h-28 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 2.5s; animation-duration: 4s;"
         />
-        <img 
-          src="/favicon1.png" 
-          alt="Logo" 
-          class="absolute bottom-10 left-10 w-32 h-32 object-contain rounded-full animate-bounce opacity-40" 
+        <img
+          src="/favicon1.png"
+          alt="Logo"
+          class="absolute bottom-10 left-10 w-32 h-32 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 1.2s; animation-duration: 3.8s;"
         />
-        <img 
-          src="/favicon1.png" 
-          alt="Logo" 
-          class="absolute top-3/4 right-10 w-28 h-28 object-contain rounded-full animate-bounce opacity-40" 
+        <img
+          src="/favicon1.png"
+          alt="Logo"
+          class="absolute top-3/4 right-10 w-28 h-28 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 0.8s; animation-duration: 4.2s;"
         />
-        <img 
-          src="/favicon1.png" 
-          alt="Logo" 
-          class="absolute top-20 right-1/2 w-36 h-36 object-contain rounded-full animate-bounce opacity-40" 
+        <img
+          src="/favicon1.png"
+          alt="Logo"
+          class="absolute top-20 right-1/2 w-36 h-36 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 3s; animation-duration: 5.5s;"
         />
-        <img 
-          src="/favicon1.png" 
-          alt="Logo" 
-          class="absolute bottom-1/3 left-1/2 w-32 h-32 object-contain rounded-full animate-bounce opacity-40" 
+        <img
+          src="/favicon1.png"
+          alt="Logo"
+          class="absolute bottom-1/3 left-1/2 w-32 h-32 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 1.8s; animation-duration: 4.8s;"
         />
       </div>
@@ -92,9 +92,9 @@
           <!-- Logo animé -->
           <div class="mb-8 animate-bounce" style="animation-duration: 2s;">
             <div class="inline-block w-32 h-32 bg-white bg-opacity-30 rounded-full flex items-center justify-center backdrop-blur-sm p-4 shadow-xl">
-              <img 
-                src="/favicon1.png" 
-                alt="Westaf-Vibe Logo" 
+              <img
+                src="/favicon1.png"
+                alt="Westaf-Vibe Logo"
                 class="w-full h-full object-contain"
               />
             </div>
@@ -104,7 +104,7 @@
             Découvrez l'inspiration quotidienne
           </h1>
           <p class="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 opacity-90 animate-fade-in-up px-4" style="animation-delay: 0.2s;">
-            Des milliers de citations pour illuminer votre journée
+            Votre source quotidienne d'inspiration et de débilité, à travers les citations les plus drôles.
           </p>
 
           <!-- (Bouton déplacé dans la carte de citation) -->
@@ -169,9 +169,9 @@
                 class="inline-block w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center animate-wiggle p-1 bg-white shadow-lg overflow-hidden"
                 :class="{ 'logo-spin-once': isTopLogoSpinning }"
               >
-                <img 
-                  src="/favicon1.png" 
-                  alt="Westaf-Vibe Logo" 
+                <img
+                  src="/favicon1.png"
+                  alt="Westaf-Vibe Logo"
                   class="w-full h-full object-cover"
                 />
               </div>
@@ -183,7 +183,7 @@
             </blockquote>
 
             <!-- Auteur -->
-            <p class="text-right text-lg font-semibold text-green-400 mb-6">
+            <p class="text-right text-base sm:text-lg font-semibold text-green-400 mb-6">
               — {{ randomQuote.author }}
             </p>
 
@@ -204,9 +204,18 @@
               </button>
             </div>
 
-            <!-- Catégorie en bas à droite -->
-            <div class="flex justify-end">
-              <span class="inline-block px-4 py-2 bg-gradient-to-r from-green-900 to-yellow-900 text-green-300 rounded-full text-sm font-medium border border-green-700">
+            <!-- Catégorie et compteur de vues en bas -->
+            <div class="flex justify-between items-center mt-4">
+              <!-- Compteur de vues à gauche -->
+              <div class="flex items-center gap-2 text-gray-500 text-xs sm:text-sm">
+                <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                <span class="font-medium">{{ randomQuote.views || 0 }} vue{{ (randomQuote.views || 0) > 1 ? 's' : '' }}</span>
+              </div>
+              <!-- Catégorie à droite -->
+              <span class="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-green-900 to-yellow-900 text-green-300 rounded-full text-xs sm:text-sm font-medium border border-green-700">
                 {{ randomQuote.category }}
               </span>
             </div>
@@ -229,7 +238,7 @@
           <p class="text-base sm:text-lg md:text-xl text-gray-600 px-4">Trouvez l'inspiration qui vous correspond</p>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto px-2">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto px-2">
           <div
             v-for="category in categories"
             :key="category.name"
@@ -256,7 +265,7 @@
           <p class="text-base sm:text-lg md:text-xl text-gray-600 px-4">Une expérience unique pour découvrir et partager des citations</p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
           <div
             v-for="(feature, index) in features"
             :key="index"
@@ -337,11 +346,20 @@ const fetchRandomQuote = async () => {
     randomError.value = null;
     isShaking.value = true;
     isTopLogoSpinning.value = true;
-    
+
     const response = await quoteService.getRandomQuote();
     randomQuote.value = response;
     showShareMenu.value = false;
-    
+
+    // Incrémenter le compteur de vues
+    if (response && response.id) {
+      const updatedQuote = await quoteService.incrementViews(response.id);
+      // Mettre à jour la citation affichée avec le nouveau compteur
+      if (updatedQuote) {
+        randomQuote.value.views = updatedQuote.views;
+      }
+    }
+
     // Animation de secousse drôle
     setTimeout(() => {
       isShaking.value = false;
@@ -370,10 +388,10 @@ const getShareLink = () => {
 // Partager sur WhatsApp
 const shareOnWhatsApp = () => {
   if (!randomQuote.value) return;
-  
+
   const quoteText = `"${randomQuote.value.text}"\n\n— ${randomQuote.value.author}\n\n📖 Découvrez plus de citations inspirantes sur Westaf-Vibe :\n${getShareLink()}\n\n✨ Westaf-Vibe - Votre source d'inspiration quotidienne`;
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(quoteText)}`;
-  
+
   window.open(whatsappUrl, '_blank');
   showShareMenu.value = false;
 };
@@ -381,9 +399,9 @@ const shareOnWhatsApp = () => {
 // Copier le lien
 const copyLink = async (event) => {
   if (!randomQuote.value) return;
-  
+
   const shareText = `"${randomQuote.value.text}"\n\n— ${randomQuote.value.author}\n\n📖 Découvrez cette citation et bien plus sur Westaf-Vibe :\n${getShareLink()}\n\n✨ Westaf-Vibe - Votre source d'inspiration quotidienne`;
-  
+
   try {
     await navigator.clipboard.writeText(shareText);
     // Afficher un message de confirmation
@@ -432,18 +450,18 @@ const handleClickOutside = (event) => {
 onMounted(async () => {
   // Afficher le loader pendant 1 seconde
   isLoading.value = true;
-  
+
   // Charger les données en parallèle
   await Promise.all([
     loadQuotes(),
     fetchRandomQuote()
   ]);
-  
+
   // Attendre 1 seconde pour afficher le loader
   setTimeout(() => {
     isLoading.value = false;
   }, 1000);
-  
+
   // Ajouter l'écouteur pour fermer le menu
   document.addEventListener('click', handleClickOutside);
 });

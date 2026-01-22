@@ -55,6 +55,31 @@ export const quoteService = {
     }
   },
 
+  // Incrémenter le compteur de vues d'une citation
+  async incrementViews(quoteId) {
+    try {
+      const quotes = getAllQuotesFromStorage();
+      const index = quotes.findIndex(q => q.id === quoteId);
+      if (index === -1) {
+        console.warn('Citation non trouvée pour incrémenter les vues');
+        return;
+      }
+      
+      // Initialiser views à 0 si inexistant
+      if (!quotes[index].views) {
+        quotes[index].views = 0;
+      }
+      
+      // Incrémenter le compteur
+      quotes[index].views = (quotes[index].views || 0) + 1;
+      saveQuotesToStorage(quotes);
+      return quotes[index];
+    } catch (error) {
+      console.error('Erreur lors de l\'incrémentation des vues:', error);
+      throw error;
+    }
+  },
+
   // Obtenir toutes les citations
   async getAllQuotes() {
     try {
@@ -83,6 +108,7 @@ export const quoteService = {
         text: quote.text,
         author: quote.author,
         category: quote.category || 'Autre',
+        views: 0, // Initialiser le compteur de vues à 0
         createdAt: new Date().toISOString()
       };
       quotes.push(newQuote);

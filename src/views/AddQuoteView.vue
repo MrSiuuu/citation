@@ -57,11 +57,11 @@
         <div class="grid md:grid-cols-2 gap-8 items-start">
           <!-- Formulaire à gauche -->
           <div>
-            <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-800 border-b-2 border-green-300 pb-4">
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-gray-800 border-b-2 border-green-300 pb-3 sm:pb-4">
               Ajouter une citation
             </h2>
             
-            <div class="bg-white border-2 border-green-300 shadow-2xl rounded-sm p-6">
+            <div class="bg-white border-2 border-green-300 shadow-2xl rounded-sm p-4 sm:p-6">
               <div v-if="error" class="bg-red-900 border border-red-700 text-red-200 px-4 py-3 rounded-sm mb-4">
                 {{ error }}
               </div>
@@ -280,12 +280,17 @@ onMounted(() => {
     if (dashboardAccess) {
       router.push('/admin')
     }
+  } else {
+    // Code expiré ou non valide, s'assurer qu'on affiche le formulaire de code
+    isCodeValid.value = false
   }
   
   // Vérifier toutes les minutes si le code est encore valide
   setInterval(() => {
     if (!isCodeStillValid()) {
       isCodeValid.value = false
+      // Si on était sur le formulaire et que le code expire, on reste sur le formulaire
+      // (pas de redirection forcée, juste réinitialiser l'état)
     }
   }, 60000) // Vérifier toutes les minutes
 })

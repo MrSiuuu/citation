@@ -22,7 +22,7 @@
             </h1>
           </div>
           <p class="text-base sm:text-lg md:text-xl text-gray-700 max-w-2xl mx-auto px-4">
-            Votre source quotidienne d'inspiration et de sagesse à travers les plus belles citations
+            Votre source quotidienne d'inspiration et de débilité, à travers les citations les plus drôles.
           </p>
         </div>
 
@@ -37,11 +37,11 @@
                 Westaf-Vibes, c’est pas né dans un grand bureau avec des réunions et des PowerPoints non hein.
               </p>
               <p>
-                C’est né un jour où je m’ennuyais fort en cours d’algo à l’ADATA.
-                Le prof parlait, moi je regardais le vide… puis j’ai eu une idée.
+                C'est né un jour où je m'ennuyais fort en cours d'algo dans la DATA. Le prof parlait, et moi je cherchais juste un truc drôle à mettre sur mon statut WhatsApp.
               </p>
               <p>
-                J’ai ouvert mon PC, j’ai lancé mon IDE… et j’ai commencé à coder comme si ma vie dépendait du projet.
+                J'avais plein de citations débiles, mais j'hésitais… du coup je me suis lancé.
+                J'ai codé un petit truc qui m'affiche une citation, et je la publie aléatoirement.
               </p>
               <p>
                 Depuis ce jour, l’objectif est simple :
@@ -52,29 +52,16 @@
               </p>
               <p>
                 Parce que parfois une citation, ça motive…
-                Mais chez nous aussi, une citation peut juste te faire exploser de rire.
+                Mais ici, une citation peut juste te faire exploser de rire.
+                Et si t'es "constipé" niveau humour… tu risques juste de t'ennuyer et trouver ça débile.
               </p>
               <p>
-                Bienvenue dans Westaf-Vibes : les vibes de chez nous, mais pour tout le monde.
+                Bienvenue dans Westaf-Vibes : les vibes drole , pour tout le monde.
               </p>
             </div>
           </div>
         </section>
 
-        <!-- Section Fonctionnalités -->
-        <section class="mb-16">
-          <h2 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center text-green-400 px-4">Ce qui nous rend uniques</h2>
-          <div class="grid md:grid-cols-3 gap-6">
-            <div
-              v-for="(feature, index) in features"
-              :key="index"
-              class="bg-white rounded-sm p-5 sm:p-6 border-2 border-green-200 hover:border-green-500 transition-all duration-300 hover:scale-105"
-            >
-              <h3 class="text-xl font-bold mb-3 text-gray-800 text-center">{{ feature.title }}</h3>
-              <p class="text-gray-600 text-center">{{ feature.description }}</p>
-            </div>
-          </div>
-        </section>
 
         <!-- Section Équipe -->
         <section class="mb-16">
@@ -141,18 +128,4 @@
 </template>
 
 <script setup>
-const features = [
-  {
-    title: 'Citations Aléatoires',
-    description: 'Découvrez chaque jour de nouvelles citations inspirantes sélectionnées pour vous'
-  },
-  {
-    title: 'Catégories Variées',
-    description: 'Explorez des milliers de citations organisées par thèmes et catégories'
-  },
-  {
-    title: 'Expérience Unique',
-    description: 'Une interface moderne et intuitive pour une expérience de lecture exceptionnelle'
-  }
-];
 </script>

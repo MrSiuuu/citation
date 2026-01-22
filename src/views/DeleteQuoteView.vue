@@ -57,9 +57,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-full">
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2 text-center">Administration des citations</h2>
+  <div class="w-full min-h-screen bg-gradient-to-br from-green-50 via-yellow-50 to-orange-50 py-8 sm:py-12">
+    <div class="container mx-auto px-4">
+    <section class="mb-8 sm:mb-12">
+      <h2 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-800 border-b pb-2 text-center px-4">Administration des citations</h2>
       
       <div v-if="error" class="bg-red-50 border-l-4 border-red-500 p-4 rounded-md text-red-700 mb-4">
         {{ error }}
@@ -78,18 +79,18 @@ onMounted(() => {
       </div>
       
       <div v-else class="grid gap-4">
-        <div v-for="quote in quotes" :key="quote.id" class="bg-white shadow-sm rounded-lg p-4 transition-all hover:shadow-md">
-          <div class="flex justify-between items-start">
-            <div>
-              <blockquote class="italic text-lg mb-2 text-gray-700">"{{ quote.text }}"</blockquote>
-              <p class="font-semibold text-gray-800">— {{ quote.author }}</p>
+        <div v-for="quote in quotes" :key="quote.id" class="bg-white border-2 border-green-300 shadow-sm rounded-sm p-4 sm:p-6 transition-all hover:shadow-md">
+          <div class="flex flex-col sm:flex-row justify-between items-start gap-4">
+            <div class="flex-1">
+              <blockquote class="italic text-base sm:text-lg mb-2 text-gray-700">"{{ quote.text }}"</blockquote>
+              <p class="font-semibold text-gray-800 text-sm sm:text-base">— {{ quote.author }}</p>
               <p class="text-xs text-gray-400 mt-1">
                 ID: {{ quote.id }} | Créée le: {{ new Date(quote.createdAt).toLocaleDateString() }}
               </p>
             </div>
             <button 
               @click="deleteQuote(quote.id)" 
-              class="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-300"
+              class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-sm transition-colors focus:outline-none focus:ring-2 focus:ring-red-300 text-sm sm:text-base w-full sm:w-auto"
             >
               Supprimer
             </button>
@@ -97,5 +98,6 @@ onMounted(() => {
         </div>
       </div>
     </section>
+    </div>
   </div>
 </template> 

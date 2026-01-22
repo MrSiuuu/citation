@@ -7,6 +7,14 @@ import AdminView from '../views/AdminView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior(to, from, savedPosition) {
+    // Si on a une position sauvegardée (retour en arrière), l'utiliser
+    if (savedPosition) {
+      return savedPosition
+    }
+    // Sinon, toujours aller en haut de la page
+    return { top: 0, behavior: 'smooth' }
+  },
   routes: [
     {
       path: '/',
