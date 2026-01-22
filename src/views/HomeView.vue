@@ -25,65 +25,79 @@
     <section class="relative bg-gradient-to-br from-green-400 via-yellow-400 to-orange-400 text-white py-20 overflow-hidden">
       <!-- Logo qui rebondit en fond -->
       <div class="absolute inset-0 overflow-hidden">
+        <!-- Tous les logos sur desktop, seulement 2-3 sur mobile -->
         <img
           src="/favicon1.png"
           alt="Logo"
-          class="absolute top-10 left-10 w-32 h-32 object-contain rounded-full animate-bounce opacity-20"
+          class="hidden md:block absolute top-10 left-10 w-32 h-32 object-contain rounded-full animate-bounce opacity-20"
           style="animation-delay: 0s; animation-duration: 3s;"
         />
         <img
           src="/favicon1.png"
           alt="Logo"
-          class="absolute top-40 right-20 w-28 h-28 object-contain rounded-full animate-bounce opacity-40"
+          class="hidden md:block absolute top-40 right-20 w-28 h-28 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 1s; animation-duration: 4s;"
         />
         <img
           src="/favicon1.png"
           alt="Logo"
-          class="absolute bottom-20 left-1/4 w-36 h-36 object-contain rounded-full animate-bounce opacity-40"
+          class="hidden md:block absolute bottom-20 left-1/4 w-36 h-36 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 2s; animation-duration: 5s;"
         />
         <img
           src="/favicon1.png"
           alt="Logo"
-          class="absolute top-1/2 right-1/3 w-24 h-24 object-contain rounded-full animate-bounce opacity-40"
+          class="hidden md:block absolute top-1/2 right-1/3 w-24 h-24 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 1.5s; animation-duration: 3.5s;"
         />
         <img
           src="/favicon1.png"
           alt="Logo"
-          class="absolute bottom-40 right-1/4 w-32 h-32 object-contain rounded-full animate-bounce opacity-40"
+          class="hidden md:block absolute bottom-40 right-1/4 w-32 h-32 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 0.5s; animation-duration: 4.5s;"
         />
         <img
           src="/favicon1.png"
           alt="Logo"
-          class="absolute top-1/4 left-1/3 w-28 h-28 object-contain rounded-full animate-bounce opacity-40"
+          class="hidden md:block absolute top-1/4 left-1/3 w-28 h-28 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 2.5s; animation-duration: 4s;"
         />
         <img
           src="/favicon1.png"
           alt="Logo"
-          class="absolute bottom-10 left-10 w-32 h-32 object-contain rounded-full animate-bounce opacity-40"
+          class="hidden md:block absolute bottom-10 left-10 w-32 h-32 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 1.2s; animation-duration: 3.8s;"
         />
         <img
           src="/favicon1.png"
           alt="Logo"
-          class="absolute top-3/4 right-10 w-28 h-28 object-contain rounded-full animate-bounce opacity-40"
+          class="hidden md:block absolute top-3/4 right-10 w-28 h-28 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 0.8s; animation-duration: 4.2s;"
         />
         <img
           src="/favicon1.png"
           alt="Logo"
-          class="absolute top-20 right-1/2 w-36 h-36 object-contain rounded-full animate-bounce opacity-40"
+          class="hidden md:block absolute top-20 right-1/2 w-36 h-36 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 3s; animation-duration: 5.5s;"
         />
         <img
           src="/favicon1.png"
           alt="Logo"
-          class="absolute bottom-1/3 left-1/2 w-32 h-32 object-contain rounded-full animate-bounce opacity-40"
+          class="hidden md:block absolute bottom-1/3 left-1/2 w-32 h-32 object-contain rounded-full animate-bounce opacity-40"
           style="animation-delay: 1.8s; animation-duration: 4.8s;"
+        />
+        <!-- Logos réduits sur mobile/tablette (seulement 2-3) -->
+        <img
+          src="/favicon1.png"
+          alt="Logo"
+          class="md:hidden absolute top-20 right-10 w-16 h-16 object-contain rounded-full animate-bounce opacity-30"
+          style="animation-delay: 1s; animation-duration: 4s;"
+        />
+        <img
+          src="/favicon1.png"
+          alt="Logo"
+          class="md:hidden absolute bottom-20 left-10 w-20 h-20 object-contain rounded-full animate-bounce opacity-30"
+          style="animation-delay: 2s; animation-duration: 5s;"
         />
       </div>
 
@@ -389,7 +403,8 @@ const getShareLink = () => {
 const shareOnWhatsApp = () => {
   if (!randomQuote.value) return;
 
-  const quoteText = `"${randomQuote.value.text}"\n\n— ${randomQuote.value.author}\n\nDécouvrez plus de citations sur Westaf-Vibe :\n${getShareLink()}\n\nWestaf-Vibe : ta dose quotidienne de débilité.`;
+  // Message ultra simple : juste la citation et le lien
+  const quoteText = `"${randomQuote.value.text}"\n\n— ${randomQuote.value.author}\n\n${getShareLink()}`;
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(quoteText)}`;
 
   window.open(whatsappUrl, '_blank');
@@ -400,7 +415,8 @@ const shareOnWhatsApp = () => {
 const copyLink = async (event) => {
   if (!randomQuote.value) return;
 
-  const shareText = `"${randomQuote.value.text}"\n\n— ${randomQuote.value.author}\n\nDécouvrez cette citation et bien plus sur Westaf-Vibe :\n${getShareLink()}\n\nWestaf-Vibe : ta dose quotidienne de débilité.`;
+  // Message ultra simple : juste la citation et le lien
+  const shareText = `"${randomQuote.value.text}"\n\n— ${randomQuote.value.author}\n\n${getShareLink()}`;
 
   try {
     await navigator.clipboard.writeText(shareText);

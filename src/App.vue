@@ -2,30 +2,82 @@
   <div class="min-h-screen bg-gradient-to-br from-green-50 via-yellow-50 to-orange-50">
     <!-- Header intégré au décor -->
     <header class="bg-gradient-to-br from-green-50 via-yellow-50 to-orange-50 sticky top-0 z-50 backdrop-blur-sm">
-      <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="max-w-7xl mx-auto py-2 sm:py-3 md:py-4 px-3 sm:px-4 md:px-6 lg:px-8">
+        <!-- Mobile: Logo à gauche, Hamburger à droite -->
+        <div class="flex md:hidden justify-between items-center">
+          <!-- Logo à gauche (grand sur mobile) -->
+          <RouterLink to="/" class="flex items-center group">
+            <img 
+              src="/favicon1.png" 
+              alt="Westaf-Vibe Logo" 
+              class="w-20 h-20 object-contain group-hover:scale-105 transform transition-all duration-300 rounded-full"
+            />
+          </RouterLink>
+          
+          <!-- Menu Hamburger à droite -->
+          <button
+            @click="mobileMenuOpen = !mobileMenuOpen"
+            class="flex items-center justify-center w-10 h-10 text-gray-700 hover:text-green-600 transition-colors"
+            aria-label="Menu"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Menu mobile déroulant -->
+        <div v-if="mobileMenuOpen" class="md:hidden mt-3 pb-3 border-t border-green-200">
+          <nav class="flex flex-col gap-3 pt-3">
+            <RouterLink 
+              to="/" 
+              @click="mobileMenuOpen = false"
+              class="text-gray-700 hover:text-green-600 transition-colors font-medium text-base py-2"
+            >
+              Accueil
+            </RouterLink>
+            <RouterLink 
+              to="/about" 
+              @click="mobileMenuOpen = false"
+              class="text-gray-700 hover:text-green-600 transition-colors font-medium text-base py-2"
+            >
+              À propos
+            </RouterLink>
+            <RouterLink
+              to="/contribute"
+              @click="mobileMenuOpen = false"
+              class="bg-gradient-to-r from-green-600 via-yellow-500 to-orange-500 hover:from-green-700 hover:via-yellow-600 hover:to-orange-600 text-white px-4 py-2 rounded-sm font-semibold text-sm text-center hover:scale-105 transform transition-all duration-300 shadow-md hover:shadow-lg"
+            >
+              Ajouter Citation
+            </RouterLink>
+          </nav>
+        </div>
+
+        <!-- Desktop: Layout normal -->
+        <div class="hidden md:flex md:flex-row justify-between items-center gap-4">
           <!-- Logo à gauche -->
           <div class="flex-shrink-0">
             <RouterLink to="/" class="flex items-center group">
               <img 
                 src="/favicon1.png" 
                 alt="Westaf-Vibe Logo" 
-                class="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain group-hover:scale-105 transform transition-all duration-300 rounded-full"
+                class="w-16 h-16 lg:w-20 lg:h-20 object-contain group-hover:scale-105 transform transition-all duration-300 rounded-full"
               />
             </RouterLink>
           </div>
           
           <!-- Menu au milieu -->
-          <nav class="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-12 flex-1">
+          <nav class="flex flex-wrap justify-center gap-6 lg:gap-8 flex-1">
             <RouterLink 
               to="/" 
-              class="text-gray-700 hover:text-green-600 transition-colors font-medium text-sm sm:text-base relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-green-600 after:to-yellow-500 hover:after:w-full after:transition-all after:duration-300"
+              class="text-gray-700 hover:text-green-600 transition-colors font-medium text-base relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-green-600 after:to-yellow-500 hover:after:w-full after:transition-all after:duration-300"
             >
               Accueil
             </RouterLink>
             <RouterLink 
               to="/about" 
-              class="text-gray-700 hover:text-green-600 transition-colors font-medium text-sm sm:text-base relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-green-600 after:to-yellow-500 hover:after:w-full after:transition-all after:duration-300"
+              class="text-gray-700 hover:text-green-600 transition-colors font-medium text-base relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-green-600 after:to-yellow-500 hover:after:w-full after:transition-all after:duration-300"
             >
               À propos
             </RouterLink>
@@ -35,7 +87,7 @@
           <div class="flex-shrink-0">
             <RouterLink
               to="/contribute"
-              class="bg-gradient-to-r from-green-600 via-yellow-500 to-orange-500 hover:from-green-700 hover:via-yellow-600 hover:to-orange-600 text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm font-semibold text-xs sm:text-sm hover:scale-105 transform transition-all duration-300 shadow-md hover:shadow-lg"
+              class="bg-gradient-to-r from-green-600 via-yellow-500 to-orange-500 hover:from-green-700 hover:via-yellow-600 hover:to-orange-600 text-white px-5 py-2.5 rounded-sm font-semibold text-sm hover:scale-105 transform transition-all duration-300 shadow-md hover:shadow-lg"
             >
               Ajouter Citation
             </RouterLink>
@@ -85,7 +137,10 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { RouterView, RouterLink } from 'vue-router';
+
+const mobileMenuOpen = ref(false);
 </script>
 
 <style>
