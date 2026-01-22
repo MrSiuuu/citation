@@ -2,21 +2,6 @@
   <div class="min-h-screen bg-gradient-to-br from-green-50 via-yellow-50 to-orange-50 py-12">
     <div class="container mx-auto px-4">
       <div class="max-w-3xl mx-auto">
-        <!-- Logo et titre -->
-        <div class="text-center mb-8">
-          <RouterLink to="/" class="inline-block mb-4">
-            <img 
-              src="/favicon1.png" 
-              alt="Westaf-Vibe Logo" 
-              class="w-20 h-20 mx-auto object-contain hover:scale-110 transform transition-all duration-300"
-            />
-          </RouterLink>
-          <h1 class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-green-600 to-yellow-500 bg-clip-text text-transparent mb-2">
-            Westaf-Vibe
-          </h1>
-          <p class="text-sm sm:text-base text-gray-600">Ta dose quotidienne de débilité</p>
-        </div>
-
         <!-- Citation -->
         <div v-if="quote" class="bg-white border-2 border-green-300 rounded-sm shadow-2xl p-8 md:p-12 transform transition-all duration-500">
           <!-- Logo du site -->
@@ -41,22 +26,19 @@
           </p>
 
           <!-- Catégorie -->
-          <div class="text-center mb-8">
+          <div class="text-center mb-6">
             <span class="inline-block px-4 py-2 bg-gradient-to-r from-green-900 to-yellow-900 text-green-300 rounded-full text-sm font-medium border border-green-700">
               {{ quote.category }}
             </span>
           </div>
 
-          <!-- Message de redirection -->
-          <div class="bg-gradient-to-r from-green-50 to-yellow-50 border-2 border-green-200 rounded-sm p-6 text-center">
-            <p class="text-gray-700 mb-4">
-              Découvrez des milliers d'autres citations inspirantes sur
-            </p>
+          <!-- Bouton retour simple -->
+          <div class="text-center">
             <RouterLink 
               to="/"
               class="inline-block bg-gradient-to-r from-green-600 via-yellow-500 to-orange-500 hover:from-green-700 hover:via-yellow-600 hover:to-orange-600 text-white px-6 py-3 rounded-sm font-semibold hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              Visiter Westaf-Vibe
+              Voir plus de citations
             </RouterLink>
           </div>
         </div>
