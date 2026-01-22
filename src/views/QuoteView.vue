@@ -98,8 +98,24 @@ onMounted(async () => {
     loading.value = true;
     // Essayer de récupérer la citation par ID
     const allQuotes = await quoteService.getAllQuotes();
-    const foundQuote = allQuotes.find(q => q.id === quoteId || 
-      q.text.substring(0, 50).toLowerCase().includes(decodeURIComponent(quoteId).toLowerCase()));
+    
+    // Convertir quoteId en nombre pour la comparaison
+    const quoteIdNum = parseInt(quoteId, 10);
+    
+    // Chercher par ID numérique d'abord
+    let foundQuote = allQuotes.find(q => q.id === quoteIdNum || String(q.id) === quoteId);
+    
+    // Si pas trouvé par ID, essayer par texte (fallback)
+    if (!foundQuote) {
+      try {
+        const decodedId = decodeURIComponent(quoteId);
+        foundQuote = allQuotes.find(q => 
+          q.text.substring(0, 50).toLowerCase().includes(decodedId.toLowerCase())
+        );
+      } catch (e) {
+        // Si le décodage échoue, on continue sans fallback
+      }
+    }
     
     if (foundQuote) {
       quote.value = foundQuote;

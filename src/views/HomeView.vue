@@ -399,13 +399,18 @@ const getShareLink = () => {
   return `${baseUrl}/quote/${quoteId}`;
 };
 
+// Générer le texte de partage (fonction commune)
+const getShareText = () => {
+  if (!randomQuote.value) return '';
+  return `"${randomQuote.value.text}"\n\n${getShareLink()}`;
+};
+
 // Partager sur WhatsApp
 const shareOnWhatsApp = () => {
   if (!randomQuote.value) return;
 
-  // Message ultra simple : juste la citation et le lien
-  const quoteText = `"${randomQuote.value.text}"\n\n— ${randomQuote.value.author}\n\n${getShareLink()}`;
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(quoteText)}`;
+  const shareText = getShareText();
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
 
   window.open(whatsappUrl, '_blank');
   showShareMenu.value = false;
@@ -415,8 +420,7 @@ const shareOnWhatsApp = () => {
 const copyLink = async (event) => {
   if (!randomQuote.value) return;
 
-  // Message ultra simple : juste la citation et le lien
-  const shareText = `"${randomQuote.value.text}"\n\n— ${randomQuote.value.author}\n\n${getShareLink()}`;
+  const shareText = getShareText();
 
   try {
     await navigator.clipboard.writeText(shareText);
