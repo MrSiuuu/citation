@@ -207,7 +207,7 @@ const newQuote = ref({
   category: 'Humour'
 });
 
-const allCategories = ref(quoteService.getCategories());
+const allCategories = ref([]);
 
 const uniqueCategories = computed(() => {
   const cats = new Set();
@@ -266,17 +266,32 @@ const handleDelete = async (id) => {
 };
 
 const addCategory = () => {
-  if (newCategory.value.trim() && !allCategories.value.includes(newCategory.value.trim())) {
-    const updatedCategories = quoteService.addCategory(newCategory.value.trim());
-    allCategories.value = updatedCategories;
-    newCategory.value = '';
+  const categoryName = newCategory.value.trim();
+  if (categoryName && !allCategories.value.includes(categoryName)) {
+    try {
+      const updatedCategories = quoteService.addCategory(categoryName);
+      allCategories.value = [...updatedCategories]; // Créer une nouvelle référence pour forcer la réactivité
+      newCategory.value = '';
+      console.log('Catégorie ajoutée:', categoryName, 'Nouvelles catégories:', updatedCategories);
+    } catch (err) {
+      error.value = "Erreur lors de l'ajout de la catégorie";
+      console.error(err);
+    }
   }
 };
 
 const deleteCategory = (category) => {
   if (confirm(`Supprimer la catégorie "${category}" ? Les citations de cette catégorie ne seront pas supprimées.`)) {
-    const updatedCategories = quoteService.deleteCategory(category);
-    allCategories.value = updatedCategories;
+    try {
+      const updatedCategories = quoteService.deleteCategory(category);
+      allCategories.value = [...updatedCategories]; // Créer une nouvelle référence pour forcer la réactivité
+      console.log('Catégorie supprimée:', category, 'Nouvelles catégories:', updatedCategories);
+      // Recharger les citations pour mettre à jour l'affichage
+      loadQuotes();
+    } catch (err) {
+      error.value = "Erreur lors de la suppression de la catégorie";
+      console.error(err);
+    }
   }
 };
 
@@ -358,7 +373,14 @@ onMounted(() => {
     return;
   }
   // Charger les catégories depuis localStorage
-  allCategories.value = quoteService.getCategories();
+  try {
+    const loadedCategories = quoteService.getCategories();
+    allCategories.value = [...loadedCategories]; // Créer une copie pour la réactivité
+    console.log('Catégories chargées au démarrage:', loadedCategories);
+  } catch (err) {
+    console.error('Erreur lors du chargement des catégories:', err);
+    allCategories.value = [...quoteService.getCategories()]; // Retry avec valeurs par défaut
+  }
   loadQuotes();
   
   // Vérifier toutes les minutes si l'accès est encore valide

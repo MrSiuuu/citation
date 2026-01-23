@@ -176,7 +176,9 @@ export const quoteService = {
 
   saveCategories(categories) {
     try {
-      localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categories));
+      const categoriesArray = Array.isArray(categories) ? categories : [];
+      localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categoriesArray));
+      console.log('Catégories sauvegardées dans localStorage:', categoriesArray);
       return true;
     } catch (error) {
       console.error('Erreur lors de la sauvegarde des catégories:', error);
@@ -201,15 +203,20 @@ export const quoteService = {
   deleteCategory(categoryName) {
     try {
       const categories = this.getCategories();
+      console.log('Catégories avant suppression:', categories, 'Catégorie à supprimer:', categoryName);
       const index = categories.indexOf(categoryName);
       if (index > -1) {
         categories.splice(index, 1);
-        this.saveCategories(categories);
+        const saved = this.saveCategories(categories);
+        console.log('Catégories après suppression:', categories, 'Sauvegarde réussie:', saved);
+        return [...categories]; // Retourner une copie
+      } else {
+        console.warn('Catégorie non trouvée pour suppression:', categoryName);
       }
-      return categories;
+      return [...categories]; // Retourner une copie même si pas supprimée
     } catch (error) {
       console.error('Erreur lors de la suppression de la catégorie:', error);
-      return this.getCategories();
+      return [...this.getCategories()];
     }
   }
 }; 

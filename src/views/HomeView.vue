@@ -169,6 +169,15 @@
                       </svg>
                       Copier le lien
                     </button>
+                    <button
+                      @click="downloadQuoteImage"
+                      class="w-full flex items-center justify-center px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-sm font-medium transition-all duration-300 hover:scale-105"
+                    >
+                      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                      Télécharger l'image
+                    </button>
                   </div>
                   <p class="text-xs text-gray-500 text-center mt-3">
                     Partagez cette citation sur Westaf-Vibe
@@ -449,6 +458,174 @@ const copyLink = async (event) => {
     console.error('Erreur lors de la copie:', err);
     alert('Lien copié ! Partagez-le avec vos amis.');
     showShareMenu.value = false;
+  }
+};
+
+// Télécharger l'image de la citation
+const downloadQuoteImage = async () => {
+  if (!randomQuote.value) return;
+
+  try {
+    showShareMenu.value = false;
+    
+    // Détecter le type d'appareil et adapter les dimensions
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+    
+    // Dimensions adaptées selon l'appareil
+    let width, height;
+    if (isMobile) {
+      width = 1080; // Format Instagram Story
+      height = 1920;
+    } else if (isTablet) {
+      width = 1200;
+      height = 1600;
+    } else {
+      width = 1200; // Format PC/Desktop
+      height = 1600;
+    }
+    
+    // Créer un canvas
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = width;
+    canvas.height = height;
+    
+    // Fond blanc
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, width, height);
+    
+    // Charger le logo
+    const logo = new Image();
+    logo.crossOrigin = 'anonymous';
+    
+    await new Promise((resolve, reject) => {
+      logo.onload = () => {
+        // Logo en haut à gauche - taille adaptée selon l'appareil
+        let logoSize, logoPadding;
+        if (isMobile) {
+          logoSize = 120; // Plus grand sur mobile
+          logoPadding = 50;
+        } else if (isTablet) {
+          logoSize = 140;
+          logoPadding = 60;
+        } else {
+          logoSize = 160; // Encore plus grand sur PC
+          logoPadding = 80;
+        }
+        
+        // Dessiner le logo avec une bordure verte
+        const logoX = logoPadding;
+        const logoY = logoPadding;
+        
+        // Cercle de fond pour le logo (optionnel, si vous voulez un fond)
+        ctx.beginPath();
+        ctx.arc(logoX + logoSize/2, logoY + logoSize/2, logoSize/2 + 5, 0, 2 * Math.PI);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fill();
+        ctx.strokeStyle = '#86efac'; // green-300
+        ctx.lineWidth = 4;
+        ctx.stroke();
+        
+        ctx.drawImage(logo, logoX, logoY, logoSize, logoSize);
+        resolve();
+      };
+      logo.onerror = reject;
+      logo.src = '/favicon1.png';
+    });
+    
+    // Configuration du texte - tailles adaptées
+    let quoteFontSize, authorFontSize, linkFontSize, lineHeight, maxWidth, quoteY;
+    
+    if (isMobile) {
+      quoteFontSize = 56;
+      authorFontSize = 36;
+      linkFontSize = 28;
+      lineHeight = 80;
+      maxWidth = width - 120;
+      quoteY = height * 0.4; // 40% depuis le haut
+    } else if (isTablet) {
+      quoteFontSize = 64;
+      authorFontSize = 40;
+      linkFontSize = 32;
+      lineHeight = 90;
+      maxWidth = width - 160;
+      quoteY = height * 0.35;
+    } else {
+      quoteFontSize = 72;
+      authorFontSize = 44;
+      linkFontSize = 36;
+      lineHeight = 100;
+      maxWidth = width - 200;
+      quoteY = height * 0.35;
+    }
+    
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    // Citation au centre
+    const quoteText = `"${randomQuote.value.text}"`;
+    const quoteX = width / 2;
+    
+    ctx.fillStyle = '#1f2937'; // gray-800
+    ctx.font = `italic ${quoteFontSize}px Georgia, serif`;
+    
+    // Diviser le texte en plusieurs lignes si nécessaire
+    const words = quoteText.split(' ');
+    let line = '';
+    let y = quoteY;
+    
+    for (let i = 0; i < words.length; i++) {
+      const testLine = line + words[i] + ' ';
+      const metrics = ctx.measureText(testLine);
+      const testWidth = metrics.width;
+      
+      if (testWidth > maxWidth && i > 0) {
+        ctx.fillText(line.trim(), quoteX, y);
+        line = words[i] + ' ';
+        y += lineHeight;
+      } else {
+        line = testLine;
+      }
+    }
+    if (line.trim()) {
+      ctx.fillText(line.trim(), quoteX, y);
+    }
+    
+    // Auteur (en bas à droite de la citation)
+    const authorY = y + lineHeight + 30;
+    ctx.fillStyle = '#4ade80'; // green-400
+    ctx.font = `600 ${authorFontSize}px sans-serif`;
+    ctx.textAlign = 'right';
+    const authorText = `— ${randomQuote.value.author}`;
+    const authorPadding = isMobile ? 60 : 100;
+    ctx.fillText(authorText, width - authorPadding, authorY);
+    
+    // Lien du site en bas
+    const siteUrl = window.location.origin;
+    ctx.fillStyle = '#6b7280'; // gray-500
+    ctx.font = `${linkFontSize}px sans-serif`;
+    ctx.textAlign = 'center';
+    const linkY = height - (isMobile ? 80 : 100);
+    ctx.fillText(`Visitez ${siteUrl}`, width / 2, linkY);
+    
+    // Télécharger l'image
+    canvas.toBlob((blob) => {
+      if (blob) {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `citation-${randomQuote.value.id || 'quote'}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+    }, 'image/png');
+    
+  } catch (err) {
+    console.error('Erreur lors de la génération de l\'image:', err);
+    alert('Erreur lors de la génération de l\'image. Veuillez réessayer.');
   }
 };
 
