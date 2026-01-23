@@ -19,5 +19,19 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:3000'
     }
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    // Utiliser base '/' pour une SPA à la racine
+    base: '/',
+    rollupOptions: {
+      output: {
+        // Nommer les fichiers de manière prévisible
+        assetFileNames: 'assets/[name].[hash].[ext]',
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js'
+      }
+    }
   }
 })
