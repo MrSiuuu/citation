@@ -18,8 +18,8 @@ RUN npm run build
 # Stage 2: Image finale avec frontend + backend + nginx
 FROM node:20-alpine
 
-# Installer nginx
-RUN apk add --no-cache nginx
+# Installer nginx et curl (pour vérifier que le backend est prêt)
+RUN apk add --no-cache nginx curl
 
 WORKDIR /app
 
