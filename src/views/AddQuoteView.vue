@@ -85,14 +85,48 @@
                 
                 <div>
                   <label for="quote-author" class="block text-sm font-medium text-gray-700 mb-2">Auteur</label>
-                  <input
-                    id="quote-author"
-                    v-model="newQuote.author"
-                    type="text"
-                    class="w-full px-4 py-3 bg-green-50 border-2 border-green-200 rounded-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                    placeholder="Nom de l'auteur"
-                    required
-                  />
+                  <div class="relative">
+                    <input
+                      id="quote-author"
+                      v-model="newQuote.author"
+                      type="text"
+                      class="w-full px-4 py-3 bg-green-50 border-2 border-green-200 rounded-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                      placeholder="Nom de l'auteur"
+                      required
+                      @focus="showAuthorsList = true"
+                      @blur="setTimeout(() => showAuthorsList = false, 200)"
+                    />
+                    <!-- Liste des auteurs existants -->
+                    <div 
+                      v-if="showAuthorsList && availableAuthors.length > 0 && !newQuote.author"
+                      class="absolute z-10 w-full mt-1 bg-white border-2 border-green-300 rounded-sm shadow-lg max-h-48 overflow-y-auto"
+                    >
+                      <button
+                        v-for="author in availableAuthors"
+                        :key="author"
+                        type="button"
+                        @click="selectAuthor(author)"
+                        class="w-full text-left px-4 py-2 hover:bg-green-50 text-gray-800 transition-colors"
+                      >
+                        {{ author }}
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Afficher les auteurs récents si le champ est vide -->
+                  <div v-if="!newQuote.author && availableAuthors.length > 0" class="mt-2">
+                    <p class="text-xs text-gray-600 mb-1">Auteurs récents :</p>
+                    <div class="flex flex-wrap gap-2">
+                      <button
+                        v-for="author in availableAuthors.slice(0, 8)"
+                        :key="author"
+                        type="button"
+                        @click="selectAuthor(author)"
+                        class="px-3 py-1 text-xs bg-green-100 hover:bg-green-200 text-gray-700 rounded-sm transition-colors"
+                      >
+                        {{ author }}
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
                 <div>
@@ -159,16 +193,42 @@ const errorMessages = [
   "Sale chien, casse-toi si t'as pas le code"
 ]
 
-const availableCategories = ref(quoteService.getCategories())
+const availableCategories = ref([])
+const availableAuthors = ref([])
+const showAuthorsList = ref(false)
 
 const newQuote = ref({
   text: '',
   author: '',
-  category: availableCategories.value[0] || 'Humour'
+  category: 'Humour'
 })
 const isSubmitting = ref(false)
 const error = ref(null)
 const successMessage = ref(null)
+
+const selectAuthor = (author) => {
+  newQuote.value.author = author
+  showAuthorsList.value = false
+}
+
+const loadCategories = async () => {
+  try {
+    availableCategories.value = await quoteService.getCategories()
+    if (availableCategories.value.length > 0 && !newQuote.value.category) {
+      newQuote.value.category = availableCategories.value[0]
+    }
+  } catch (err) {
+    console.error('Erreur lors du chargement des catégories:', err)
+  }
+}
+
+const loadAuthors = async () => {
+  try {
+    availableAuthors.value = await quoteService.getAuthors()
+  } catch (err) {
+    console.error('Erreur lors du chargement des auteurs:', err)
+  }
+}
 
 const checkCode = () => {
   loading.value = true
@@ -250,7 +310,10 @@ const addQuote = async () => {
     await quoteService.addQuote(newQuote.value)
     
     // Réinitialiser le formulaire
-    newQuote.value = { text: '', author: '', category: 'Humour' }
+    newQuote.value = { text: '', author: '', category: availableCategories.value[0] || 'Humour' }
+    
+    // Recharger les auteurs pour inclure le nouvel auteur
+    await loadAuthors()
     
     // Afficher un message de succès
     successMessage.value = 'Citation ajoutée avec succès !'
@@ -266,9 +329,10 @@ const addQuote = async () => {
   }
 }
 
-onMounted(() => {
-  // Charger les catégories depuis localStorage
-  availableCategories.value = quoteService.getCategories()
+onMounted(async () => {
+  // Charger les catégories et auteurs depuis l'API
+  await loadCategories()
+  await loadAuthors()
   
   // Vérifier si le code est encore valide (10 minutes)
   if (isCodeStillValid()) {
@@ -284,14 +348,13 @@ onMounted(() => {
   }
   
   // Vérifier toutes les minutes si le code est encore valide
-  setInterval(() => {
+  setInterval(async () => {
     if (!isCodeStillValid()) {
       isCodeValid.value = false
-      // Si on était sur le formulaire et que le code expire, on reste sur le formulaire
-      // (pas de redirection forcée, juste réinitialiser l'état)
     }
-    // Recharger les catégories au cas où elles ont été modifiées
-    availableCategories.value = quoteService.getCategories()
+    // Recharger les catégories et auteurs au cas où ils ont été modifiés
+    await loadCategories()
+    await loadAuthors()
   }, 60000) // Vérifier toutes les minutes
 })
 </script>

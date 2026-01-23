@@ -3,4 +3,6 @@ dist
 npm-debug.log
 .env
 .git
-.gitignore 
+.gitignore
+server/data
+*.md 

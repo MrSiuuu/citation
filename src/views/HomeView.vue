@@ -319,11 +319,20 @@ const isTopLogoSpinning = ref(false);
 const quotes = ref([]);
 const isLoading = ref(true);
 
+const availableCategories = ref([]);
+
+// Charger les catégories depuis l'API
+const loadCategories = async () => {
+  try {
+    availableCategories.value = await quoteService.getCategories();
+  } catch (err) {
+    console.error('Erreur lors du chargement des catégories:', err);
+    availableCategories.value = ['Amour', 'Motivation', 'Vie', 'Sagesse', 'Succès', 'Bonheur', 'Philosophie', 'Humour'];
+  }
+};
+
 // Catégories avec icônes et dégradés
 const categories = computed(() => {
-  // Récupérer les catégories depuis localStorage (celles gérées par l'admin)
-  const availableCategories = quoteService.getCategories();
-
   const categoryCounts = quotes.value.reduce((acc, quote) => {
     const cat = quote.category || 'Autre';
     acc[cat] = (acc[cat] || 0) + 1;
@@ -342,8 +351,7 @@ const categories = computed(() => {
   };
 
   // Filtrer pour ne garder que les catégories disponibles ET qui ont des citations
-  // D'abord, ne garder que les catégories qui sont dans availableCategories
-  const validCategories = availableCategories.filter(cat => categoryCounts[cat] > 0);
+  const validCategories = availableCategories.value.filter(cat => categoryCounts[cat] > 0);
 
   return validCategories.map(name => ({
     name,
@@ -658,7 +666,8 @@ onMounted(async () => {
   // Charger les données en parallèle
   await Promise.all([
     loadQuotes(),
-    fetchRandomQuote()
+    fetchRandomQuote(),
+    loadCategories()
   ]);
 
   // Attendre 1 seconde pour afficher le loader

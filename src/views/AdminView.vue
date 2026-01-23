@@ -265,31 +265,31 @@ const handleDelete = async (id) => {
   }
 };
 
-const addCategory = () => {
+const addCategory = async () => {
   const categoryName = newCategory.value.trim();
   if (categoryName && !allCategories.value.includes(categoryName)) {
     try {
-      const updatedCategories = quoteService.addCategory(categoryName);
+      const updatedCategories = await quoteService.addCategory(categoryName);
       allCategories.value = [...updatedCategories]; // Créer une nouvelle référence pour forcer la réactivité
       newCategory.value = '';
       console.log('Catégorie ajoutée:', categoryName, 'Nouvelles catégories:', updatedCategories);
     } catch (err) {
-      error.value = "Erreur lors de l'ajout de la catégorie";
+      error.value = err.message || "Erreur lors de l'ajout de la catégorie";
       console.error(err);
     }
   }
 };
 
-const deleteCategory = (category) => {
+const deleteCategory = async (category) => {
   if (confirm(`Supprimer la catégorie "${category}" ? Les citations de cette catégorie ne seront pas supprimées.`)) {
     try {
-      const updatedCategories = quoteService.deleteCategory(category);
+      const updatedCategories = await quoteService.deleteCategory(category);
       allCategories.value = [...updatedCategories]; // Créer une nouvelle référence pour forcer la réactivité
       console.log('Catégorie supprimée:', category, 'Nouvelles catégories:', updatedCategories);
       // Recharger les citations pour mettre à jour l'affichage
       loadQuotes();
     } catch (err) {
-      error.value = "Erreur lors de la suppression de la catégorie";
+      error.value = err.message || "Erreur lors de la suppression de la catégorie";
       console.error(err);
     }
   }
@@ -368,19 +368,12 @@ const checkAccessValidity = () => {
   return true;
 };
 
-onMounted(() => {
+onMounted(async () => {
   if (!checkAccessValidity()) {
     return;
   }
-  // Charger les catégories depuis localStorage
-  try {
-    const loadedCategories = quoteService.getCategories();
-    allCategories.value = [...loadedCategories]; // Créer une copie pour la réactivité
-    console.log('Catégories chargées au démarrage:', loadedCategories);
-  } catch (err) {
-    console.error('Erreur lors du chargement des catégories:', err);
-    allCategories.value = [...quoteService.getCategories()]; // Retry avec valeurs par défaut
-  }
+  // Charger les catégories depuis l'API
+  await loadCategories();
   loadQuotes();
   
   // Vérifier toutes les minutes si l'accès est encore valide
