@@ -476,22 +476,9 @@ const downloadQuoteImage = async () => {
   try {
     showShareMenu.value = false;
     
-    // Détecter le type d'appareil et adapter les dimensions
-    const isMobile = window.innerWidth < 768;
-    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-    
-    // Dimensions adaptées selon l'appareil
-    let width, height;
-    if (isMobile) {
-      width = 1080; // Format Instagram Story
-      height = 1920;
-    } else if (isTablet) {
-      width = 1200;
-      height = 1600;
-    } else {
-      width = 1200; // Format PC/Desktop
-      height = 1600;
-    }
+    // Format rectangle uniforme pour tous les écrans (ratio 16:9)
+    const width = 1920;  // Largeur fixe
+    const height = 1080; // Hauteur fixe (format rectangulaire)
     
     // Créer un canvas
     const canvas = document.createElement('canvas');
@@ -503,70 +490,13 @@ const downloadQuoteImage = async () => {
     ctx.fillStyle = '#FFFFFF';
     ctx.fillRect(0, 0, width, height);
     
-    // Charger le logo
-    const logo = new Image();
-    logo.crossOrigin = 'anonymous';
-    
-    await new Promise((resolve, reject) => {
-      logo.onload = () => {
-        // Logo en haut à gauche - taille adaptée selon l'appareil
-        let logoSize, logoPadding;
-        if (isMobile) {
-          logoSize = 120; // Plus grand sur mobile
-          logoPadding = 50;
-        } else if (isTablet) {
-          logoSize = 140;
-          logoPadding = 60;
-        } else {
-          logoSize = 160; // Encore plus grand sur PC
-          logoPadding = 80;
-        }
-        
-        // Dessiner le logo avec une bordure verte
-        const logoX = logoPadding;
-        const logoY = logoPadding;
-        
-        // Cercle de fond pour le logo (optionnel, si vous voulez un fond)
-        ctx.beginPath();
-        ctx.arc(logoX + logoSize/2, logoY + logoSize/2, logoSize/2 + 5, 0, 2 * Math.PI);
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fill();
-        ctx.strokeStyle = '#86efac'; // green-300
-        ctx.lineWidth = 4;
-        ctx.stroke();
-        
-        ctx.drawImage(logo, logoX, logoY, logoSize, logoSize);
-        resolve();
-      };
-      logo.onerror = reject;
-      logo.src = '/favicon1.png';
-    });
-    
-    // Configuration du texte - tailles adaptées
-    let quoteFontSize, authorFontSize, linkFontSize, lineHeight, maxWidth, quoteY;
-    
-    if (isMobile) {
-      quoteFontSize = 56;
-      authorFontSize = 36;
-      linkFontSize = 28;
-      lineHeight = 80;
-      maxWidth = width - 120;
-      quoteY = height * 0.4; // 40% depuis le haut
-    } else if (isTablet) {
-      quoteFontSize = 64;
-      authorFontSize = 40;
-      linkFontSize = 32;
-      lineHeight = 90;
-      maxWidth = width - 160;
-      quoteY = height * 0.35;
-    } else {
-      quoteFontSize = 72;
-      authorFontSize = 44;
-      linkFontSize = 36;
-      lineHeight = 100;
-      maxWidth = width - 200;
-      quoteY = height * 0.35;
-    }
+    // Configuration du texte - tailles adaptées au format rectangle
+    const quoteFontSize = 64;
+    const authorFontSize = 42;
+    const linkFontSize = 32;
+    const lineHeight = 90;
+    const maxWidth = width - 200; // Marges latérales
+    const quoteY = height * 0.35; // Citation à 35% depuis le haut
     
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -600,21 +530,49 @@ const downloadQuoteImage = async () => {
       ctx.fillText(line.trim(), quoteX, y);
     }
     
-    // Auteur (en bas à droite de la citation)
-    const authorY = y + lineHeight + 30;
+    // Auteur (juste après la citation)
+    const authorY = y + lineHeight + 40;
     ctx.fillStyle = '#4ade80'; // green-400
     ctx.font = `600 ${authorFontSize}px sans-serif`;
-    ctx.textAlign = 'right';
+    ctx.textAlign = 'center';
     const authorText = `— ${randomQuote.value.author}`;
-    const authorPadding = isMobile ? 60 : 100;
-    ctx.fillText(authorText, width - authorPadding, authorY);
+    ctx.fillText(authorText, width / 2, authorY);
+    
+    // Charger le logo et le placer au centre après la citation
+    const logo = new Image();
+    logo.crossOrigin = 'anonymous';
+    
+    await new Promise((resolve, reject) => {
+      logo.onload = () => {
+        // Logo agrandi au centre, après la citation
+        const logoSize = 200; // Logo plus grand
+        const logoY = authorY + 80; // Position après l'auteur
+        
+        // Dessiner le logo centré
+        const logoX = (width - logoSize) / 2;
+        
+        // Cercle de fond pour le logo (optionnel)
+        ctx.beginPath();
+        ctx.arc(width / 2, logoY + logoSize/2, logoSize/2 + 8, 0, 2 * Math.PI);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fill();
+        ctx.strokeStyle = '#86efac'; // green-300
+        ctx.lineWidth = 6;
+        ctx.stroke();
+        
+        ctx.drawImage(logo, logoX, logoY, logoSize, logoSize);
+        resolve();
+      };
+      logo.onerror = reject;
+      logo.src = '/favicon1.png';
+    });
     
     // Lien du site en bas
     const siteUrl = window.location.origin;
     ctx.fillStyle = '#6b7280'; // gray-500
     ctx.font = `${linkFontSize}px sans-serif`;
     ctx.textAlign = 'center';
-    const linkY = height - (isMobile ? 80 : 100);
+    const linkY = height - 60;
     ctx.fillText(`Visitez ${siteUrl}`, width / 2, linkY);
     
     // Télécharger l'image
