@@ -330,7 +330,7 @@ const addQuote = async () => {
 }
 
 onMounted(async () => {
-  // Charger les catégories et auteurs depuis l'API
+  // Charger les catégories et auteurs
   await loadCategories()
   await loadAuthors()
   

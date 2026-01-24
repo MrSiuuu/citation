@@ -209,6 +209,15 @@ const newQuote = ref({
 
 const allCategories = ref([]);
 
+const loadCategories = async () => {
+  try {
+    allCategories.value = await quoteService.getCategories();
+  } catch (err) {
+    console.error('Erreur lors du chargement des catégories:', err);
+    allCategories.value = ['Amour', 'Motivation', 'Vie', 'Sagesse', 'Succès', 'Bonheur', 'Philosophie', 'Humour'];
+  }
+};
+
 const uniqueCategories = computed(() => {
   const cats = new Set();
   quotes.value.forEach(q => {
@@ -269,12 +278,12 @@ const addCategory = async () => {
   const categoryName = newCategory.value.trim();
   if (categoryName && !allCategories.value.includes(categoryName)) {
     try {
-      const updatedCategories = await quoteService.addCategory(categoryName);
-      allCategories.value = [...updatedCategories]; // Créer une nouvelle référence pour forcer la réactivité
+      const updated = await quoteService.addCategory(categoryName);
+      allCategories.value = Array.isArray(updated) ? updated : await quoteService.getCategories();
       newCategory.value = '';
-      console.log('Catégorie ajoutée:', categoryName, 'Nouvelles catégories:', updatedCategories);
+      console.log('Catégorie ajoutée:', categoryName);
     } catch (err) {
-      error.value = err.message || "Erreur lors de l'ajout de la catégorie";
+      error.value = "Erreur lors de l'ajout de la catégorie";
       console.error(err);
     }
   }
@@ -283,13 +292,13 @@ const addCategory = async () => {
 const deleteCategory = async (category) => {
   if (confirm(`Supprimer la catégorie "${category}" ? Les citations de cette catégorie ne seront pas supprimées.`)) {
     try {
-      const updatedCategories = await quoteService.deleteCategory(category);
-      allCategories.value = [...updatedCategories]; // Créer une nouvelle référence pour forcer la réactivité
-      console.log('Catégorie supprimée:', category, 'Nouvelles catégories:', updatedCategories);
+      const updated = await quoteService.deleteCategory(category);
+      allCategories.value = Array.isArray(updated) ? updated : await quoteService.getCategories();
+      console.log('Catégorie supprimée:', category);
       // Recharger les citations pour mettre à jour l'affichage
       loadQuotes();
     } catch (err) {
-      error.value = err.message || "Erreur lors de la suppression de la catégorie";
+      error.value = "Erreur lors de la suppression de la catégorie";
       console.error(err);
     }
   }
@@ -372,9 +381,7 @@ onMounted(async () => {
   if (!checkAccessValidity()) {
     return;
   }
-  // Charger les catégories depuis l'API
-  await loadCategories();
-  loadQuotes();
+  await Promise.all([loadCategories(), loadQuotes()]);
   
   // Vérifier toutes les minutes si l'accès est encore valide
   setInterval(() => {

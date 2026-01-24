@@ -1,6 +1,10 @@
 // Service pour gérer les citations via l'API backend
-const API_URL = '/api/quotes';
-const CATEGORIES_KEY = 'westaf_categories';
+// - En dev: Vite proxy /api -> backend (recommandé)
+// - En prod: définir VITE_API_BASE_URL (ex: https://api.monsite.com)
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+const API_URL = `${API_BASE_URL}/api/quotes`;
+const CATEGORIES_API_URL = `${API_BASE_URL}/api/categories`;
+const AUTHORS_API_URL = `${API_BASE_URL}/api/authors`;
 
 // Fonction utilitaire pour les appels API
 const apiCall = async (endpoint, options = {}) => {
@@ -124,7 +128,7 @@ export const quoteService = {
   // Gestion des catégories (via API backend)
   async getCategories() {
     try {
-      const response = await fetch('/api/categories');
+      const response = await fetch(CATEGORIES_API_URL);
       if (!response.ok) throw new Error('Erreur lors de la récupération des catégories');
       return await response.json();
     } catch (error) {
@@ -136,7 +140,7 @@ export const quoteService = {
 
   async addCategory(categoryName) {
     try {
-      const response = await fetch('/api/categories', {
+      const response = await fetch(CATEGORIES_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: categoryName })
@@ -155,7 +159,7 @@ export const quoteService = {
   async deleteCategory(categoryName) {
     try {
       const encodedName = encodeURIComponent(categoryName);
-      const response = await fetch(`/api/categories/${encodedName}`, {
+      const response = await fetch(`${CATEGORIES_API_URL}/${encodedName}`, {
         method: 'DELETE'
       });
       if (!response.ok) {
@@ -173,7 +177,7 @@ export const quoteService = {
   // Récupérer tous les auteurs uniques
   async getAuthors() {
     try {
-      const response = await fetch('/api/authors');
+      const response = await fetch(AUTHORS_API_URL);
       if (!response.ok) throw new Error('Erreur lors de la récupération des auteurs');
       return await response.json();
     } catch (error) {

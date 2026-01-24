@@ -17,21 +17,12 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': 'http://localhost:3000'
-    }
+      // Dev only: évite CORS, et garde les URLs en /api
+      '/api': 'http://localhost:3000',
+    },
   },
   build: {
     outDir: 'dist',
-    assetsDir: 'assets',
-    // Utiliser base '/' pour une SPA à la racine
-    base: '/',
-    rollupOptions: {
-      output: {
-        // Nommer les fichiers de manière prévisible
-        assetFileNames: 'assets/[name].[hash].[ext]',
-        chunkFileNames: 'assets/[name].[hash].js',
-        entryFileNames: 'assets/[name].[hash].js'
-      }
-    }
+    assetsDir: 'assets'
   }
 })
